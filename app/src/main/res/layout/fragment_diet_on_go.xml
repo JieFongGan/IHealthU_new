@@ -3,19 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".diet.DietFragment">
+    tools:context=".diet.DietOnGoFragment">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/dietTab"
+        android:id="@+id/dogTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        android:contentDescription="dietTab"/>
-
+        android:contentDescription="DOGTab"/>
 
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/dietTabViewPager"
+        android:id="@+id/dogTabViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
