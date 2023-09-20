@@ -18,4 +18,14 @@
     <string name="search_plan">search plan</string>
     <string name="my_plan">my plan</string>
     <string name="history">History</string>
+    <string name="create_new_plan">create new plan</string>
+    <string name="description">Description:</string>
+    <string name="plan_name">Plan name:</string>
+    <string name="description_hint">write your description here</string>
+    <string name="plan_hint">write your plan name here</string>
+    <string name="create">create</string>
+    <string name="cancel">cancel</string>
+    <string name="search">search</string>
+    <string name="import_txt">import</string>
+    <string name="actor">Actor:</string>
 </resources>
