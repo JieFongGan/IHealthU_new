@@ -5,17 +5,78 @@
     android:layout_height="match_parent"
     tools:context=".diet.DietOnGoFragment">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/dogTab"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:contentDescription="DOGTab"/>
-
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/dogTabViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="48dp"
+        android:padding="10dp"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/dogMon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mon"
+                android:textSize="8sp"
+                android:padding="4dp"/>
+            <Button
+                android:id="@+id/dogTue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tue"
+                android:textSize="8sp"
+                android:padding="4dp"/>
+            <Button
+                android:id="@+id/dogWed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Wed"
+                android:textSize="8sp"
+                android:padding="4dp"/>
+            <Button
+                android:id="@+id/dogThu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Thu"
+                android:textSize="8sp"
+                android:padding="4dp"/>
+            <Button
+                android:id="@+id/dogFri"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Fri"
+                android:textSize="8sp"
+                android:padding="4dp"/>
+            <Button
+                android:id="@+id/dogSat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sat"
+                android:textSize="8sp"
+                android:padding="4dp"/>
+            <Button
+                android:id="@+id/dogSun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sun"
+                android:textSize="8sp"
+                android:padding="4dp"/>
+        </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dogRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+    </LinearLayout>
 
 </FrameLayout>
