@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ToolbarTheme" parent="Widget.AppCompat.Toolbar">
+        <!-- Customize the background color of the Toolbar -->
+        <item name="android:background">@color/material_dynamic_neutral80</item>
+    </style>
+</resources>
