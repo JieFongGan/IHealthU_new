@@ -55,27 +55,27 @@ class DietPlanFragment : Fragment() {
         setupRecyclerView()
         database = IHUdatabase.getInstance(requireContext())
 
-//        val sampleDietPlans = listOf(
-//            DietPlan(dpID = "101", dpPlanName = "testPlan", dpOwnerName = "testName", dpAgeRange = "32", dpPurpose = "GG.com",
-//                dpDays = "Mon",
-//                dpBftime = "9.30am", dpBfRatio = "p3s4b3", dpBfEsKl = "300kal", dpBfRemark = "eat",
-//                dpLutime = "9.30am", dpLuRatio = "p3s4b3", dpLuEsKl = "300kal", dpLuRemark = "eat",
-//                dpDntime = "9.30am", dpDnRatio = "p3s4b3", dpDnEsKl = "300kal", dpDnRemark = "eat"),
-//            DietPlan(dpID = "102", dpPlanName = "testPlan", dpOwnerName = "testName", dpAgeRange = "32", dpPurpose = "GG.com",
-//                dpDays = "Tue",
-//                dpBftime = "9.00am", dpBfRatio = "p3s4b3", dpBfEsKl = "300kal", dpBfRemark = "eat",
-//                dpLutime = "9.00am", dpLuRatio = "p3s4b3", dpLuEsKl = "300kal", dpLuRemark = "eat",
-//                dpDntime = "9.00am", dpDnRatio = "p3s4b3", dpDnEsKl = "300kal", dpDnRemark = "eat")
-//        )
-//        // Initialize with Monday's data
-//        val realData = database.dietPlanDao.getPlansByDay("Mon")
-//        if (realData.isEmpty()) {
-//            database.dietPlanDao.insert(sampleDietPlans[0])
-//        } else {
-//            adapter.submitList(realData)
-//        }
+        val sampleDietPlans = listOf(
+            DietPlan(dpID = "101", dpPlanName = "testPlan", dpOwnerName = "testName", dpAgeRange = "32", dpPurpose = "GG.com",
+                dpDays = "Mon",
+                dpBftime = "9.30am", dpBfRatio = "p3s4b3", dpBfEsKl = "300kal", dpBfRemark = "eat",
+                dpLutime = "9.30am", dpLuRatio = "p3s4b3", dpLuEsKl = "300kal", dpLuRemark = "eat",
+                dpDntime = "9.30am", dpDnRatio = "p3s4b3", dpDnEsKl = "300kal", dpDnRemark = "eat"),
+            DietPlan(dpID = "102", dpPlanName = "testPlan", dpOwnerName = "testName", dpAgeRange = "32", dpPurpose = "GG.com",
+                dpDays = "Tue",
+                dpBftime = "9.00am", dpBfRatio = "p3s4b3", dpBfEsKl = "300kal", dpBfRemark = "eat",
+                dpLutime = "9.00am", dpLuRatio = "p3s4b3", dpLuEsKl = "300kal", dpLuRemark = "eat",
+                dpDntime = "9.00am", dpDnRatio = "p3s4b3", dpDnEsKl = "300kal", dpDnRemark = "eat")
+        )
         // Initialize with Monday's data
-        loadDataForDay("Mon")
+        val realData = database.dietPlanDao.getPlansByDay("Mon")
+        if (realData.isEmpty()) {
+            database.dietPlanDao.insert(sampleDietPlans[0])
+        } else {
+            adapter.submitList(realData)
+        }
+        // Initialize with Monday's data
+//        loadDataForDay("Mon")
         // Set up click listeners for each button to load data for that day
         dogMon.setOnClickListener { loadDataForDay("Mon") }
         dogTue.setOnClickListener { loadDataForDay("Tue") }

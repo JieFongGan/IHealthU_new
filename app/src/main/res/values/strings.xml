@@ -32,4 +32,6 @@
     <string name="search">search</string>
     <string name="import_txt">import</string>
     <string name="actor">Actor:</string>
+    <string name="delete">delete</string>
+    <string name="edit">edit</string>
 </resources>

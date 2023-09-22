@@ -6,20 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.ihealthu.R
-import com.example.ihealthu.databinding.FragmentExerciseBinding
 
 class ExerciseFragment : Fragment() {
+
+//    private lateinit var exercisePlanDatabase: ExercisePlanDatabase
+//    private lateinit var exercisePlanDao: ExercisePlanDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_exercise, container, false)
+        val view =  inflater.inflate(R.layout.fragment_exercise, container, false)
+//        exercisePlanDatabase = ExercisePlanDatabase.getInstance(requireContext())
+//        exercisePlanDao = exercisePlanDatabase.exercisePlanDao()
+
+        // Rest of your onCreateView code
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,13 +33,20 @@ class ExerciseFragment : Fragment() {
 
 
         btntomyeplan.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_exerciseFragment_to_exercise_MyplanFragment)
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         btntosearcheplan.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_exerciseFragment_to_exercise_searchFragment)
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_searchFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
-
-
     }
+
 }

@@ -74,8 +74,11 @@
 
             <!-- Button -->
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dailyeg_View"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:itemCount="2"
+                tools:listitem="@layout/list_dailyexercise" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,7 +120,9 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/list_exercisehistory" />
 
             </LinearLayout>
         </LinearLayout>
