@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="loginViewModel"
+            type="com.example.ihealthu.login.LoginViewModel" />
+    </data>
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
@@ -63,7 +72,8 @@
                     app:boxStrokeWidth ="1dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:text="@={loginViewModel.inputEmail}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:inputType="textEmailAddress"
@@ -74,7 +84,7 @@
                         android:textStyle="normal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                         />
+                        android:importantForAutofill="no"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:hint="Password"
@@ -87,7 +97,8 @@
                     app:endIconMode="password_toggle"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:text="@={loginViewModel.inputPass}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:inputType="textPassword"
@@ -98,7 +109,7 @@
                         android:textStyle="normal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        />
+                        android:importantForAutofill="no"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <Button
                     android:id="@+id/btnLoginPageForgetPassword"
@@ -147,3 +158,4 @@
 
 
 </LinearLayout>
+</layout>

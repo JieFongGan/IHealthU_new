@@ -12,4 +12,11 @@
         android:text="@string/title_home"
         android:textSize="34sp" />
 
+    <Button
+        android:id="@+id/goLogInBtn"
+        android:text="@string/log_in"
+        android:textSize="17sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </FrameLayout>
