@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/exerciseFragment">
+
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="com.example.ihealthu.exercise.ExerciseFragment"
+        android:label="fragment_exercise"
+        tools:layout="@layout/fragment_exercise" >
+        <action
+            android:id="@+id/action_exerciseFragment_to_exercise_searchFragment"
+            app:destination="@id/exercise_searchFragment" />
+        <action
+            android:id="@+id/action_exerciseFragment_to_exercise_MyplanFragment"
+            app:destination="@id/exercise_MyplanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exercise_CreateplanFragment"
+        android:name="com.example.ihealthu.exercise.Exercise_CreateplanFragment"
+        android:label="fragment_exercise__createplan"
+        tools:layout="@layout/fragment_exercise__createplan" />
+    <fragment
+        android:id="@+id/exercise_MyplanFragment"
+        android:name="com.example.ihealthu.exercise.Exercise_MyplanFragment"
+        android:label="fragment_exercise_myplan"
+        tools:layout="@layout/fragment_exercise_myplan" />
+    <fragment
+        android:id="@+id/exercise_searchplandetailFragment"
+        android:name="com.example.ihealthu.exercise.Exercise_searchplandetailFragment"
+        android:label="fragment_exercise_searchplandetail"
+        tools:layout="@layout/fragment_exercise_searchplandetail" />
+    <fragment
+        android:id="@+id/exercise_searchFragment"
+        android:name="com.example.ihealthu.exercise.Exercise_searchFragment"
+        android:label="fragment_exercise_search"
+        tools:layout="@layout/fragment_exercise_search" />
+</navigation>
