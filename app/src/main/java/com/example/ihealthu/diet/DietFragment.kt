@@ -33,9 +33,8 @@ class DietFragment : Fragment() {
         // Connect tab and viewpager
         TabLayoutMediator(dietTab, dietTabViewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = "Current Plan"
+                0 -> tab.text = "Diet Plan"
                 1 -> tab.text = "Search Plan"
-                2 -> tab.text = "Create Plan"
             }
         }.attach()
 

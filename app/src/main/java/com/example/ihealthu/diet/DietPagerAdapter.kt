@@ -6,7 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 public class DietPagerAdapter(fm:FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fm, lifecycle) {
-    private val fragmentList = listOf(DietOnGoFragment(),DietSearchFragment() ,DietCreateFragment())
+    private val fragmentList = listOf(DietPlanFragment(),DietSearchFragment())
     override fun getItemCount(): Int {
         return fragmentList.size
         }
