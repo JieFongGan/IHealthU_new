@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentDietPlanBinding
-import com.example.ihealthu.exercise.Exercise_MyplanFragment
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class DietPlanFragment : Fragment() {
@@ -49,22 +50,29 @@ class DietPlanFragment : Fragment() {
         dogFri = binding.dogFri
         dogSat = binding.dogSat
         dogSun = binding.dogSun
+
         dogEdit = binding.dogEdit
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Initialize with Monday's data
-//        loadDataForDay("Mon")
-//        //Set up click listeners for each button to load data for that day
-//        dogMon.setOnClickListener { loadDataForDay("Mon") }
-//        dogTue.setOnClickListener { loadDataForDay("Tue") }
-//        dogWed.setOnClickListener { loadDataForDay("Wed") }
-//        dogThu.setOnClickListener { loadDataForDay("Thu") }
-//        dogFri.setOnClickListener { loadDataForDay("Fri") }
-//        dogSat.setOnClickListener { loadDataForDay("Sat") }
-//        dogSun.setOnClickListener { loadDataForDay("Sun") }
+        // Initialize RecyclerView with an empty list
+        dogRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        dogRecyclerView.adapter = DietPlanAdapter(emptyList<Map<String, Any>>().toMutableList())
+        //Initialize
+        dogRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        // Fetch data for Monday by default
+        loadDataForDay("Mon")
+        // Set click listeners for each day button
+        binding.dogMon.setOnClickListener { loadDataForDay("Mon") }
+        binding.dogTue.setOnClickListener { loadDataForDay("Tue") }
+        binding.dogWed.setOnClickListener { loadDataForDay("Wed") }
+        binding.dogThu.setOnClickListener { loadDataForDay("Thu") }
+        binding.dogFri.setOnClickListener { loadDataForDay("Fri") }
+        binding.dogSat.setOnClickListener { loadDataForDay("Sat") }
+        binding.dogSun.setOnClickListener { loadDataForDay("Sun") }
 
+        // DietPlanAddFragment
         dogEdit.setOnClickListener {
             try {
                 val fragmentManager = parentFragmentManager
@@ -77,17 +85,50 @@ class DietPlanFragment : Fragment() {
             }
         }
     }
+    private fun loadDataForDay(day: String) {
+        lifecycleScope.launch {
+            val data = fetchDataFromFirestore(day)
+            // Populate the RecyclerView with the fetched data
+            // Assuming you have a DietAdapter that takes the fetched data
+            (dogRecyclerView.adapter as DietPlanAdapter).submitList(data)
+        }
+    }
+    private suspend fun fetchDataFromFirestore(day: String): List<Map<String, Any>> {
+        return withContext(Dispatchers.IO) {
+            val dietDataList = mutableListOf<Map<String, Any>>()
+            try {
+                val querySnapshot = db.collection("diet")
+                    .whereEqualTo("dpDietDays", day)
+                    .get()
+                    .await()
+
+                for (document in querySnapshot.documents) {
+                    Log.d("Firestore", "Document ID: ${document.id} => Document Data: ${document.data}")
+                    val data = document.data
+                    if (data != null) {
+                        dietDataList.add(data)
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("DietPlanFragment", "Error fetching data: ${e.message}")
+            }
+            return@withContext dietDataList
+        }
+    }
+
 //    fun loadDataForDay(day: String) {
-//        val dietPlanList = mutableListOf<DietPlan>()
-//        db.collection("DietPlans")
+//
+//        val dietPlanList = mutableListOf<Map<String, Any>>()
+//        db.collection("diet")
 //            .whereEqualTo("dpDietDays", day)
 //            .get()
 //            .addOnSuccessListener { documents ->
 //                for (document in documents) {
-//                    val dietPlan = document.toObject(DietPlan::class.java)
-//                    dietPlanList.add(dietPlan)
+//                    val dietPlanMap = document.data  // This will be a Map<String, Any>
+//                    dietPlanList.add(dietPlanMap)
 //                }
 //                // Update the RecyclerView here
+//                // You'll need to modify your RecyclerView Adapter to work with Map<String, Any>
 //            }
 //            .addOnFailureListener { exception ->
 //                Log.e("Firebase", "Error fetching data: ", exception)

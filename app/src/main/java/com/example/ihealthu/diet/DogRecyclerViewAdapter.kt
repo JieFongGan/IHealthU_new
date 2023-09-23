@@ -14,15 +14,12 @@
 //class DogRecyclerViewAdapter : ListAdapter<DietPlan, DogRecyclerViewAdapter.ViewHolder>(DietDiffCallback()) {
 //    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 //        private val bfTime: TextView = itemView.findViewById(R.id.bfTime)
-//        private val bfRatio: TextView = itemView.findViewById(R.id.bfRatio)
 //        private val bfEsKl: TextView = itemView.findViewById(R.id.bfEsKl)
 //        private val bfRemark: TextView = itemView.findViewById(R.id.bfRemark)
 //        private val luTime: TextView = itemView.findViewById(R.id.luTime)
-//        private val luRatio: TextView = itemView.findViewById(R.id.luRatio)
 //        private val luEsKl: TextView = itemView.findViewById(R.id.luEsKl)
 //        private val luRemark: TextView = itemView.findViewById(R.id.luRemark)
 //        private val dnTime: TextView = itemView.findViewById(R.id.dnTime)
-//        private val dnRatio: TextView = itemView.findViewById(R.id.dnRatio)
 //        private val dnEsKl: TextView = itemView.findViewById(R.id.dnEsKl)
 //        private val dnRemark: TextView = itemView.findViewById(R.id.dnRemark)
 //        fun bind(dietPlan: DietPlan) {
