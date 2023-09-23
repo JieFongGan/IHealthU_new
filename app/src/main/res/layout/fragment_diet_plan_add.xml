@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".diet.DietPlanAddFragment">
+
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/editTextPlanName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Plan Name"/>
+        <EditText
+            android:id="@+id/editTextPlanPurpose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Plan Purpose"/>
+        <EditText
+            android:id="@+id/editTextAgeGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Plan Age Group"/>
+        <EditText
+            android:id="@+id/editTextBreakfastTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Breakfast Time"/>
+        <EditText
+            android:id="@+id/editTextBreakfastKals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Breakfast Kals"/>
+        <EditText
+            android:id="@+id/editTextBreakfastRemark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Breakfast Food Remark"/>
+        <EditText
+            android:id="@+id/editTextLunchTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Lunch Time"/>
+        <EditText
+            android:id="@+id/editTextLunchKals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Lunch Kals"/>
+        <EditText
+            android:id="@+id/editTextLunchRemark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Lunch Food Remark"/>
+        <EditText
+            android:id="@+id/editTextDinnerTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Dinner Time"/>
+        <EditText
+            android:id="@+id/editTextDinnerKals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Dinner Kals"/>
+        <EditText
+            android:id="@+id/editTextDinnerRemark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Dinner Food Remark"/>
+        <Button
+            android:id="@+id/confirmPlanAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm"
+            android:minHeight="48dp"/>
+    </LinearLayout>
+</ScrollView>
+    </FrameLayout>
+

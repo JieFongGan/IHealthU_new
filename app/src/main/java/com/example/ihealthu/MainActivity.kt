@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.ihealthu.databinding.ActivityMainBinding
-//import com.example.ihealthu.diet.DietFragment
+import com.example.ihealthu.diet.DietFragment
 import com.example.ihealthu.exercise.ExerciseFragment
 import com.example.ihealthu.home.HomeFragment
 import com.example.ihealthu.profile.User_Main
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.nav_home -> replaceFragment(HomeFragment())
-//                R.id.nav_diet -> replaceFragment(DietFragment())
+                R.id.nav_diet -> replaceFragment(DietFragment())
                 R.id.nav_exercise -> replaceFragment(ExerciseFragment())
                 R.id.nav_profile -> replaceFragment(User_Main())
 
