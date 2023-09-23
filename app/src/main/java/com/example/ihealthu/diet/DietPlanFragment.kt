@@ -55,15 +55,15 @@ class DietPlanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Initialize with Monday's data
-        loadDataForDay("Mon")
-        //Set up click listeners for each button to load data for that day
-        dogMon.setOnClickListener { loadDataForDay("Mon") }
-        dogTue.setOnClickListener { loadDataForDay("Tue") }
-        dogWed.setOnClickListener { loadDataForDay("Wed") }
-        dogThu.setOnClickListener { loadDataForDay("Thu") }
-        dogFri.setOnClickListener { loadDataForDay("Fri") }
-        dogSat.setOnClickListener { loadDataForDay("Sat") }
-        dogSun.setOnClickListener { loadDataForDay("Sun") }
+//        loadDataForDay("Mon")
+//        //Set up click listeners for each button to load data for that day
+//        dogMon.setOnClickListener { loadDataForDay("Mon") }
+//        dogTue.setOnClickListener { loadDataForDay("Tue") }
+//        dogWed.setOnClickListener { loadDataForDay("Wed") }
+//        dogThu.setOnClickListener { loadDataForDay("Thu") }
+//        dogFri.setOnClickListener { loadDataForDay("Fri") }
+//        dogSat.setOnClickListener { loadDataForDay("Sat") }
+//        dogSun.setOnClickListener { loadDataForDay("Sun") }
 
         dogEdit.setOnClickListener {
             try {
@@ -77,22 +77,22 @@ class DietPlanFragment : Fragment() {
             }
         }
     }
-    fun loadDataForDay(day: String) {
-        val dietPlanList = mutableListOf<DietPlan>()
-        db.collection("DietPlans")
-            .whereEqualTo("dpDietDays", day)
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val dietPlan = document.toObject(DietPlan::class.java)
-                    dietPlanList.add(dietPlan)
-                }
-                // Update the RecyclerView here
-            }
-            .addOnFailureListener { exception ->
-                Log.e("Firebase", "Error fetching data: ", exception)
-            }
-    }
+//    fun loadDataForDay(day: String) {
+//        val dietPlanList = mutableListOf<DietPlan>()
+//        db.collection("DietPlans")
+//            .whereEqualTo("dpDietDays", day)
+//            .get()
+//            .addOnSuccessListener { documents ->
+//                for (document in documents) {
+//                    val dietPlan = document.toObject(DietPlan::class.java)
+//                    dietPlanList.add(dietPlan)
+//                }
+//                // Update the RecyclerView here
+//            }
+//            .addOnFailureListener { exception ->
+//                Log.e("Firebase", "Error fetching data: ", exception)
+//            }
+//    }
 
 }
 //        val sampleDietPlans = listOf(

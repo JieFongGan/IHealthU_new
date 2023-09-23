@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".exercise.Exercise_CreateplanFragment">
 
 
@@ -12,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
@@ -70,12 +71,13 @@
 
             <HorizontalScrollView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:scrollbars="none">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/button_layout"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -83,70 +85,70 @@
                         android:id="@+id/btn_monday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:text="@string/monday"
-                        android:layout_marginEnd="8dp"/>
+                        android:text="@string/monday" />
 
                     <Button
                         android:id="@+id/btn_tuesday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:text="@string/tuesday"
-                        android:layout_marginEnd="8dp"/>
+                        android:text="@string/tuesday" />
 
                     <Button
                         android:id="@+id/btn_wednesday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:text="@string/wednesday"
-                        android:layout_marginEnd="8dp"/>
+                        android:text="@string/wednesday" />
 
                     <Button
                         android:id="@+id/btn_thursday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:text="@string/thursday"
-                        android:layout_marginEnd="8dp"/>
+                        android:text="@string/thursday" />
 
                     <Button
                         android:id="@+id/btn_friday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:text="@string/friday"
-                        android:layout_marginEnd="8dp"/>
+                        android:text="@string/friday" />
 
                     <Button
                         android:id="@+id/btn_saturday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:text="@string/saturday"
-                        android:layout_marginEnd="8dp"/>
+                        android:text="@string/saturday" />
 
                     <Button
                         android:id="@+id/btn_sunday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:text="@string/sunday"
-                        android:layout_marginEnd="8dp"/>
+                        android:text="@string/sunday" />
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ce_tabcontent"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:itemCount="1"
-                tools:listitem="@layout/list_createplan" />
+                android:layout_height="150dp" />
 
             <LinearLayout
+                android:id="@+id/button_action"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:orientation="horizontal"
                 android:padding="@dimen/activity_horizontal_margin">
 
@@ -165,6 +167,7 @@
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_weight="1"
                     android:text="@string/create" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
