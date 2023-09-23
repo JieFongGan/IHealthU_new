@@ -36,6 +36,17 @@ class Exercise_CreateplanFragment : Fragment() {
         val btnimporteplan : Button = view.findViewById(R.id.btn_importeplan)
         val inputNewPlanName: EditText = view.findViewById(R.id.input_newplanname)
         val inputnewplandescription: EditText = view.findViewById(R.id.input_newplan_description)
+        val btnMonday: Button = view.findViewById(R.id.btn_monday)
+        val btnTuesday: Button = view.findViewById(R.id.btn_tuesday)
+        val btnWednesday: Button = view.findViewById(R.id.btn_wednesday)
+        val btnThursday: Button = view.findViewById(R.id.btn_thursday)
+        val btnFriday: Button = view.findViewById(R.id.btn_friday)
+        val btnSaturday: Button = view.findViewById(R.id.btn_saturday)
+        val btnSunday: Button = view.findViewById(R.id.btn_sunday)
+        val recyclerView: RecyclerView = view.findViewById(R.id.ce_tabcontent)
+//        val adapter = MyRecyclerViewAdapter(emptyData)
+//        recyclerView.adapter = adapter
+
 
 
         btncancel.setOnClickListener {
