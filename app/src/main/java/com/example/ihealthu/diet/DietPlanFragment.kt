@@ -59,8 +59,10 @@ class DietPlanFragment : Fragment() {
         // Initialize RecyclerView with an empty list
         dogRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         dogRecyclerView.adapter = DietPlanAdapter(emptyList<Map<String, Any>>().toMutableList())
-        //Initialize
         dogRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        //pass value to another frag
+        parentFragmentManager.setFragmentResultListener("selectedDay", this) { _, bundle ->
+            val selectedDay = bundle.getString("day")}
         // Fetch data for Monday by default
         loadDataForDay("Mon")
         // Set click listeners for each day button
@@ -88,8 +90,12 @@ class DietPlanFragment : Fragment() {
     private fun loadDataForDay(day: String) {
         lifecycleScope.launch {
             val data = fetchDataFromFirestore(day)
-            // Populate the RecyclerView with the fetched data
-            // Assuming you have a DietAdapter that takes the fetched data
+            //chg the value
+            val bundle = Bundle().apply {
+                putString("day", day)
+            }
+            parentFragmentManager.setFragmentResult("selectedDay", bundle)
+            //submitList
             (dogRecyclerView.adapter as DietPlanAdapter).submitList(data)
         }
     }

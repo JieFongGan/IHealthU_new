@@ -60,7 +60,11 @@ class DietPlanAddFragment : Fragment() {
         etDnRemark = binding.editTextDinnerRemark
 
         etOwnerName = "TestName123"
-        etDietDays = "Mon"
+        //get value for weekly day
+        parentFragmentManager.setFragmentResultListener("selectedDay", this) { _, bundle ->
+            val selectedDay = bundle.getString("day")
+            etDietDays = selectedDay.toString()
+        }
 
         comfirmAdd = binding.confirmPlanAdd
         cancelAdd = binding.cancelPlanAdd
@@ -129,7 +133,8 @@ class DietPlanAddFragment : Fragment() {
         }
         //cancel button
             cancelAdd.setOnClickListener {
-                Toast.makeText(view.context,"canceled",Toast.LENGTH_SHORT).show()
+                val txDietDays = etDietDays
+                Toast.makeText(view.context,"canceled $txDietDays",Toast.LENGTH_SHORT).show()
                 val fragmentManager = parentFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.framelayout_activitymain, DietPlanFragment())
