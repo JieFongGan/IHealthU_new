@@ -133,8 +133,7 @@ class DietPlanAddFragment : Fragment() {
         }
         //cancel button
             cancelAdd.setOnClickListener {
-                val txDietDays = etDietDays
-                Toast.makeText(view.context,"canceled $txDietDays",Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context,"canceled",Toast.LENGTH_SHORT).show()
                 val fragmentManager = parentFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.framelayout_activitymain, DietPlanFragment())
