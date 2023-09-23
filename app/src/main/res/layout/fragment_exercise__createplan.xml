@@ -68,58 +68,81 @@
                     android:textAlignment="center" />
             </LinearLayout>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scrollbars="none">
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/monday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/monday" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tuesday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tuesday" />
+                    <Button
+                        android:id="@+id/btn_monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/monday"
+                        android:layout_marginEnd="8dp"/>
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/wednesday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/wednesday" />
+                    <Button
+                        android:id="@+id/btn_tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tuesday"
+                        android:layout_marginEnd="8dp"/>
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/thursday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/thursday" />
+                    <Button
+                        android:id="@+id/btn_wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/wednesday"
+                        android:layout_marginEnd="8dp"/>
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/friday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/friday" />
+                    <Button
+                        android:id="@+id/btn_thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/thursday"
+                        android:layout_marginEnd="8dp"/>
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/saturday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/saturday" />
+                    <Button
+                        android:id="@+id/btn_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/friday"
+                        android:layout_marginEnd="8dp"/>
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/sunday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sunday" />
+                    <Button
+                        android:id="@+id/btn_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/saturday"
+                        android:layout_marginEnd="8dp"/>
 
-            </com.google.android.material.tabs.TabLayout>
+                    <Button
+                        android:id="@+id/btn_sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/sunday"
+                        android:layout_marginEnd="8dp"/>
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ce_tabcontent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:itemCount="1"
+                tools:listitem="@layout/list_createplan" />
 
             <LinearLayout
                 android:layout_width="match_parent"

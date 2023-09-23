@@ -34,4 +34,7 @@
     <string name="actor">Actor:</string>
     <string name="delete">delete</string>
     <string name="edit">edit</string>
+    <string name="exercise">exercise:</string>
+    <string name="your_input_here">your input here</string>
+    <string name="time">time:</string>
 </resources>
