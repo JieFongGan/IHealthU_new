@@ -40,20 +40,7 @@ class Exercise_CreateplanFragment : Fragment() {
         val inputNewPlanName: EditText = view.findViewById(R.id.input_newplanname)
         val inputnewplandescription: EditText = view.findViewById(R.id.input_newplan_description)
 
-        val exerciseInput1: EditText = view.findViewById(R.id.dailye1_input)
-        val timeInput1: EditText = view.findViewById(R.id.dailyt1_input)
-        val exerciseInput2: EditText = view.findViewById(R.id.dailye2_input)
-        val timeInput2: EditText = view.findViewById(R.id.dailyt2_input)
-        val exerciseInput3: EditText = view.findViewById(R.id.dailye3_input)
-        val timeInput3: EditText = view.findViewById(R.id.dailyt3_input)
-        val exerciseInput4: EditText = view.findViewById(R.id.dailye4_input)
-        val timeInput4: EditText = view.findViewById(R.id.dailyt4_input)
-        val exerciseInput5: EditText = view.findViewById(R.id.dailye5_input)
-        val timeInput5: EditText = view.findViewById(R.id.dailyt5_input)
-        val exerciseInput6: EditText = view.findViewById(R.id.dailye6_input)
-        val timeInput6: EditText = view.findViewById(R.id.dailyt6_input)
-        val exerciseInput7: EditText = view.findViewById(R.id.dailye7_input)
-        val timeInput7: EditText = view.findViewById(R.id.dailyt7_input)
+
 
         //7 day button
         val btnMonday: Button = view.findViewById(R.id.btn_monday)
@@ -98,15 +85,23 @@ class Exercise_CreateplanFragment : Fragment() {
             viewPager.currentItem = 6
         }
 
-        btncancel.setOnClickListener {
-            val fragmentManager = parentFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        }
+
 
         btnimporteplan.setOnClickListener {
+            val exerciseInput1: EditText = view.findViewById(R.id.dailye1_input)
+            val timeInput1: EditText = view.findViewById(R.id.dailyt1_input)
+            val exerciseInput2: EditText = view.findViewById(R.id.dailye2_input)
+            val timeInput2: EditText = view.findViewById(R.id.dailyt2_input)
+            val exerciseInput3: EditText = view.findViewById(R.id.dailye3_input)
+            val timeInput3: EditText = view.findViewById(R.id.dailyt3_input)
+            val exerciseInput4: EditText = view.findViewById(R.id.dailye4_input)
+            val timeInput4: EditText = view.findViewById(R.id.dailyt4_input)
+            val exerciseInput5: EditText = view.findViewById(R.id.dailye5_input)
+            val timeInput5: EditText = view.findViewById(R.id.dailyt5_input)
+            val exerciseInput6: EditText = view.findViewById(R.id.dailye6_input)
+            val timeInput6: EditText = view.findViewById(R.id.dailyt6_input)
+            val exerciseInput7: EditText = view.findViewById(R.id.dailye7_input)
+            val timeInput7: EditText = view.findViewById(R.id.dailyt7_input)
 
             val newPlanName = inputNewPlanName.text.toString()
             val newPlandescription = inputnewplandescription.text.toString()
@@ -159,6 +154,16 @@ class Exercise_CreateplanFragment : Fragment() {
                     Log.w(TAG, "Error adding document", e)
                     Toast.makeText(context, "failed, try again", Toast.LENGTH_SHORT).show()
                 }
+        }
+        btncancel.setOnClickListener {
+            val exerciseInput7: EditText = view.findViewById(R.id.dailye7_input)
+            Toast.makeText(context, "failed, try again $exerciseInput7", Toast.LENGTH_SHORT).show()
+
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
     }
 }
