@@ -17,23 +17,11 @@
         android:padding="16dp">
 
         <EditText
-            android:id="@+id/editTextPlanName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:hint="Plan Name"/>
-        <EditText
             android:id="@+id/editTextPlanPurpose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:hint="Plan Purpose"/>
-        <EditText
-            android:id="@+id/editTextAgeGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:hint="Plan Age Group"/>
         <EditText
             android:id="@+id/editTextBreakfastTime"
             android:layout_width="match_parent"
@@ -93,6 +81,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Confirm"
+            android:minHeight="48dp"/>
+        <Button
+            android:id="@+id/cancelPlanAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
             android:minHeight="48dp"/>
     </LinearLayout>
 </ScrollView>

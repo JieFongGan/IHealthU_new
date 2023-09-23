@@ -38,23 +38,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Breakfast Ratio: " />
-
-        <TextView
-            android:id="@+id/bfRatio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="bfRatio" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Breakfast EsKl: " />
 
         <TextView
@@ -106,22 +89,7 @@
             android:layout_height="wrap_content"
             android:text="luTime" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lunch Ratio: " />
-
-        <TextView
-            android:id="@+id/luRatio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="luRatio" />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -178,22 +146,7 @@
             android:layout_height="wrap_content"
             android:text="dnTime" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dinner Ratio: " />
-
-        <TextView
-            android:id="@+id/dnRatio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="dnRatio" />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

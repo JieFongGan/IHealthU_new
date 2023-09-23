@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentDietPlanBinding
 import com.example.ihealthu.exercise.Exercise_MyplanFragment
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -30,6 +32,9 @@ class DietPlanFragment : Fragment() {
     private lateinit var dogSat: Button
     private lateinit var dogSun: Button
     private lateinit var dogEdit: Button
+
+    val db = Firebase.firestore
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,16 +54,16 @@ class DietPlanFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Initialize with Monday's data
-//        loadDataForDay("Mon")
-        // Set up click listeners for each button to load data for that day
-//        dogMon.setOnClickListener { loadDataForDay("Mon") }
-//        dogTue.setOnClickListener { loadDataForDay("Tue") }
-//        dogWed.setOnClickListener { loadDataForDay("Wed") }
-//        dogThu.setOnClickListener { loadDataForDay("Thu") }
-//        dogFri.setOnClickListener { loadDataForDay("Fri") }
-//        dogSat.setOnClickListener { loadDataForDay("Sat") }
-//        dogSun.setOnClickListener { loadDataForDay("Sun") }
+        //Initialize with Monday's data
+        loadDataForDay("Mon")
+        //Set up click listeners for each button to load data for that day
+        dogMon.setOnClickListener { loadDataForDay("Mon") }
+        dogTue.setOnClickListener { loadDataForDay("Tue") }
+        dogWed.setOnClickListener { loadDataForDay("Wed") }
+        dogThu.setOnClickListener { loadDataForDay("Thu") }
+        dogFri.setOnClickListener { loadDataForDay("Fri") }
+        dogSat.setOnClickListener { loadDataForDay("Sat") }
+        dogSun.setOnClickListener { loadDataForDay("Sun") }
 
         dogEdit.setOnClickListener {
             try {
@@ -72,8 +77,22 @@ class DietPlanFragment : Fragment() {
             }
         }
     }
-
-
+    fun loadDataForDay(day: String) {
+        val dietPlanList = mutableListOf<DietPlan>()
+        db.collection("DietPlans")
+            .whereEqualTo("dpDietDays", day)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val dietPlan = document.toObject(DietPlan::class.java)
+                    dietPlanList.add(dietPlan)
+                }
+                // Update the RecyclerView here
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Firebase", "Error fetching data: ", exception)
+            }
+    }
 
 }
 //        val sampleDietPlans = listOf(
