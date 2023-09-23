@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".Register">
+    <ScrollView
+        android:id="@+id/scroll_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="80dp"
         android:layout_marginStart="38dp"
         android:layout_marginEnd="38dp"
         app:cardUseCompatPadding="true"
@@ -100,29 +103,55 @@
                         android:layout_height="wrap_content"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:hint="Contact"
+                <TextView
+                    android:id="@+id/tvDateOfBirth"
+                    android:text="Date of birth: "
+                    android:textSize="13sp"
+                    android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
-                    app:shapeAppearanceOverlay="@style/Button4"
-                    app:boxStrokeColor = "#4E4A4A"
-                    app:boxStrokeWidth ="1dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"/>
+                <CalendarView
+                    android:id="@+id/cvDateOfBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvGender"
+                    android:text="Gender: "
+                    android:textSize="13sp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:inputType="number"
-                        android:id="@+id/registerContact"
-                        android:ems="10"
-                        android:textSize="13sp"
-                        android:textColor="@color/black"
-                        android:textStyle="normal"
-                        android:layout_width="match_parent"
+                <RadioGroup
+                    android:id="@+id/genderRadioGroup"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/maleRadioButton"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:text="Male" />
+
+                    <RadioButton
+                        android:id="@+id/femaleRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female" />
+
+
+                </RadioGroup>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:hint="Password"
                     android:layout_marginLeft="5dp"
@@ -208,6 +237,6 @@
 
 
     </androidx.cardview.widget.CardView>
-
+    </ScrollView>
 
 </LinearLayout>

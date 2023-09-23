@@ -156,8 +156,6 @@ class Exercise_CreateplanFragment : Fragment() {
                 }
         }
         btncancel.setOnClickListener {
-            val exerciseInput7: EditText = view.findViewById(R.id.dailye7_input)
-            Toast.makeText(context, "failed, try again $exerciseInput7", Toast.LENGTH_SHORT).show()
 
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
