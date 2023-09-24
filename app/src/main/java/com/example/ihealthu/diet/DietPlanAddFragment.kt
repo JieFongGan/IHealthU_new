@@ -65,10 +65,14 @@ class DietPlanAddFragment : Fragment() {
             etDietDays = selectedDay.toString()
         }
         //get the existing data documentID
-        val documentIds = arguments?.getString("documentId")
-        documentId = documentIds.toString()
-        //ettexthold to existing data
-        val dataForTheDay = arguments?.getSerializable("dayData") as? List<Map<String, Any>>
+        parentFragmentManager.setFragmentResultListener("documentId", this) { _, bundle ->
+            val documentIds = bundle.getString("docID")
+            documentId = documentIds.toString()
+        }
+        //ettexthold to existing data !!
+        parentFragmentManager.setFragmentResultListener("dietPlanData", this) { _, bundle ->
+            val dataForTheDay = bundle.getSerializable("dayData") as? List<Map<String, Any>>
+//        val dataForTheDay = arguments?.getSerializable("dayData") as? List<Map<String, Any>>
         if (dataForTheDay != null && dataForTheDay.isNotEmpty()) {
             val firstData = dataForTheDay.first()
             etPlanPP.setText(firstData["dpPlanPP"] as? String)
@@ -81,6 +85,7 @@ class DietPlanAddFragment : Fragment() {
             etBftime.setText(firstData["dpDntime"] as? String)
             etBfkals.setText(firstData["dpDnkals"] as? String)
             etBfRemark.setText(firstData["dpDnRemark"] as? String)
+        }
         }
 
         comfirmAdd = binding.confirmPlanAdd

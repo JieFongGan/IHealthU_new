@@ -98,12 +98,13 @@ class DietPlanFragment : Fragment() {
                     val dataForTheDay: List<Map<String, Any>> =
                         fetchDataFromFirestore(theday, etOwnerName)
                     val documentIdp = documentId
+                    Log.d("Firestore", "Document ID set to inedit button: $documentIdp")
                     val bundle = Bundle()
-                    bundle.putSerializable(
-                        "dayData",
-                        dataForTheDay as Serializable
-                    )
-                    bundle.putString("documentId", documentIdp)
+
+                    setFragmentResult("dietPlanData", bundleOf("dayData" to dataForTheDay as Serializable))
+                    setFragmentResult("documentId", bundleOf("docID" to documentIdp))
+//                    bundle.putSerializable("dayData",dataForTheDay as Serializable)
+//                    bundle.putString("documentId", documentIdp)
                 }//navi to PlanAdd
                 val fragmentManager = parentFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
@@ -148,6 +149,7 @@ class DietPlanFragment : Fragment() {
                     .addOnSuccessListener { querySnapshot ->
                         for (document in querySnapshot) {
                             documentId = document.id
+                            Log.d("Firestore", "Document ID set to: $documentId")
                         }
                     }.await()
                 for (document in querySnapshot.documents) {
