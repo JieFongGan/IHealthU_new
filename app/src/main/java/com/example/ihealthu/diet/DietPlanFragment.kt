@@ -24,6 +24,7 @@ import kotlinx.coroutines.withContext
 import java.io.Serializable
 import kotlinx.coroutines.*
 import android.app.AlertDialog
+import android.widget.Toast
 
 class DietPlanFragment : Fragment() {
 
@@ -126,21 +127,30 @@ class DietPlanFragment : Fragment() {
                     lifecycleScope.launch {
                         deleteDataFromFirestore(theday, etOwnerName)
                     }
+                    Toast.makeText(context,"$theday data deleted",Toast.LENGTH_SHORT).show()
+                    val fragmentManager = parentFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.framelayout_activitymain, DietPlanFragment())
+                    fragmentTransaction.addToBackStack(null)
+                    fragmentTransaction.commit()
                 } catch (e: Exception) {
                     Log.e("DietPlanFragment", "Error deleting data: ${e.message}")
                 }
             }
-            // Add "No" button
+            //No button
             builder.setNegativeButton("No") { dialog, which ->
                 // Do nothing
             }
-            // Create and show the dialog
             val dialog = builder.create()
             dialog.show()
         }
         //DietPlanSearch
         dogSearch.setOnClickListener{
-
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, DietSearchFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
     }//end of OnCreate View
     //weekly button fetch data

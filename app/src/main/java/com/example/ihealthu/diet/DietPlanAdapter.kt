@@ -10,6 +10,7 @@ import com.example.ihealthu.R
 class DietPlanAdapter(private val dietDataList: MutableList<Map<String, Any>>) : RecyclerView.Adapter<DietPlanAdapter.DietViewHolder>() {
 
     class DietViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val txTheday: TextView = itemView.findViewById(R.id.txTheday)
         val ppPDesc: TextView = itemView.findViewById(R.id.ppPDesc)
         val bfTime: TextView = itemView.findViewById(R.id.bfTime)
         val bfEsKl: TextView = itemView.findViewById(R.id.bfEsKl)
@@ -29,7 +30,7 @@ class DietPlanAdapter(private val dietDataList: MutableList<Map<String, Any>>) :
 
     override fun onBindViewHolder(holder: DietViewHolder, position: Int) {
         val currentItem = dietDataList[position]
-
+        holder.txTheday.text = currentItem["dpDietDays"]?.toString() ?: "N/A"
         holder.ppPDesc.text = currentItem["dpPlanPP"]?.toString() ?: "N/A"
         holder.bfTime.text = currentItem["dpBftime"]?.toString() ?: "N/A"
         holder.bfEsKl.text = currentItem["dpBfkals"]?.toString() ?: "N/A"

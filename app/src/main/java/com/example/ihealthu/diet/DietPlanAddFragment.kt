@@ -127,7 +127,6 @@ class DietPlanAddFragment : Fragment() {
                     "dpDnkals" to txDnkals,
                     "dpDnRemark" to txDnRemark
                 )
-
                     var ownerName: String? = null
                     var day: String? = null
                     if (dataForTheDayf != null && dataForTheDayf!!.isNotEmpty()) {
@@ -138,7 +137,7 @@ class DietPlanAddFragment : Fragment() {
                         }
                         Log.d("testvalue", "test value ownername = $ownerName , $day")
                     }
-                    if(dataForTheDayf != null && dataForTheDayf!!.isNotEmpty()){
+                    if(dataForTheDayf != null && dataForTheDayf!!.isNotEmpty() && ownerName!=null && day!=null){
                         // Update existing data
                         db.collection("diet")
                             .whereEqualTo("dpOwnerName", ownerName)
