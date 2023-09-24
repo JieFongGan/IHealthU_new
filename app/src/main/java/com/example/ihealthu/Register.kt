@@ -60,7 +60,7 @@ class Register : AppCompatActivity() {
                         db.collection("user")
                             .add(data)
                             .addOnSuccessListener {
-
+                                Toast.makeText(this, "Successfull register an account", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this, Login::class.java)
                                 startActivity(intent)
                             }
