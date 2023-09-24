@@ -1,3 +1,4 @@
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,6 +27,7 @@ class Exercise_MyplanFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnneweplan: Button
+    private lateinit var deletebtn: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +44,7 @@ class Exercise_MyplanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val myeplanAdapter = MyeplanAdapter(emptyList<Map<String, Any>>().toMutableList()) { position ->
+        val myeplanAdapter = MyeplanAdapter(requireContext(), emptyList<Map<String, Any>>().toMutableList()) { position ->
             // Handle delete button click
             deleteItem(position)
         }
@@ -56,9 +58,9 @@ class Exercise_MyplanFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
-        // Fetch data from Firestore and update the adapter
-        lifecycleScope.launch {
-            val data = fetchDataFromFirestore()
+
+        val ownerName = "jian"
+        fetchDataFromFirestore(ownerName) { data ->
             myeplanAdapter.submitList(data)
         }
     }
@@ -67,10 +69,13 @@ class Exercise_MyplanFragment : Fragment() {
         val item = (recyclerView.adapter as MyeplanAdapter).getItemAtPosition(position)
         val epID = item["epID"].toString()
 
+        Log.d(TAG, "Deleting document with epID: $epID")
+
         db.collection("exercise")
             .document(epID)
             .delete()
             .addOnSuccessListener {
+                Log.d(TAG, "Document deleted successfully")
                 val fragmentManager = parentFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
@@ -78,31 +83,35 @@ class Exercise_MyplanFragment : Fragment() {
                 fragmentTransaction.commit()
             }
             .addOnFailureListener { e ->
-                // Handle errors, e.g., show a Toast with the error message
+                Log.e(TAG, "Delete failed: ${e.message}")
                 Toast.makeText(requireContext(), "Delete failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private suspend fun fetchDataFromFirestore(): List<Map<String, Any>> {
-        return withContext(Dispatchers.IO) {
-            val MyeplanList = mutableListOf<Map<String, Any>>()
-            try {
-                val querySnapshot = db.collection("exercise")
-                    .whereEqualTo("epOwner", "jian")
-                    .get()
-                    .await()
 
-                for (document in querySnapshot.documents) {
-                    Log.d("Firestore", "Document ID: ${document.id} => Document Data: ${document.data}")
-                    val data = document.data
-                    if (data != null) {
-                        MyeplanList.add(data)
+    private fun fetchDataFromFirestore(ownerName: String, onDataFetched: (List<Map<String, Any>>) -> Unit) {
+        val MyeplanList = mutableListOf<Map<String, Any>>()
+        try {
+            // Create the collection name dynamically based on ownerName
+            val collectionName = "exercise"
+
+            db.collection(collectionName)
+                .whereEqualTo("epOwner", ownerName)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    for (document in querySnapshot.documents) {
+                        val data = document.data
+                        if (data != null) {
+                            MyeplanList.add(data)
+                        }
                     }
+                    onDataFetched(MyeplanList)
                 }
-            } catch (e: Exception) {
-                Log.e("MyePlanFragment", "Error fetching data: ${e.message}")
-            }
-            return@withContext MyeplanList
+                .addOnFailureListener { e ->
+                    Log.e("MyePlanFragment", "Error fetching data: ${e.message}")
+                }
+        } catch (e: Exception) {
+            Log.e("MyePlanFragment", "Error fetching data: ${e.message}")
         }
     }
 }

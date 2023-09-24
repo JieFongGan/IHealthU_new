@@ -16,7 +16,6 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
-    val db = Firebase.firestore
     private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
