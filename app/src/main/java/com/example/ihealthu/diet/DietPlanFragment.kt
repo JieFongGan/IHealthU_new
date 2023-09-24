@@ -46,7 +46,7 @@ class DietPlanFragment : Fragment() {
     //user name
     private lateinit var etOwnerName: String
 
-    private lateinit var documentId: String
+    private var documentId: String?=null
 
     val db = Firebase.firestore
 
