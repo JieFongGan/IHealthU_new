@@ -72,19 +72,18 @@ class DietPlanAddFragment : Fragment() {
         //ettexthold to existing data !!
         parentFragmentManager.setFragmentResultListener("dietPlanData", this) { _, bundle ->
             val dataForTheDay = bundle.getSerializable("dayData") as? List<Map<String, Any>>
-//        val dataForTheDay = arguments?.getSerializable("dayData") as? List<Map<String, Any>>
-        if (dataForTheDay != null && dataForTheDay.isNotEmpty()) {
-            val firstData = dataForTheDay.first()
-            etPlanPP.setText(firstData["dpPlanPP"] as? String)
-            etBftime.setText(firstData["dpBftime"] as? String)
-            etBfkals.setText(firstData["dpBfkals"] as? String)
-            etBfRemark.setText(firstData["dpBfRemark"] as? String)
-            etLutime.setText(firstData["dpLutime"] as? String)
-            etLukals.setText(firstData["dpLukals"] as? String)
-            etLuRemark.setText(firstData["dpLuRemark"] as? String)
-            etDntime.setText(firstData["dpDntime"] as? String)
-            etDnkals.setText(firstData["dpDnkals"] as? String)
-            etDnRemark.setText(firstData["dpDnRemark"] as? String)
+            if (dataForTheDay != null && dataForTheDay.isNotEmpty()) {
+                val firstData = dataForTheDay.first()
+                etPlanPP.setText(firstData["dpPlanPP"] as? String)
+                etBftime.setText(firstData["dpBftime"] as? String)
+                etBfkals.setText(firstData["dpBfkals"] as? String)
+                etBfRemark.setText(firstData["dpBfRemark"] as? String)
+                etLutime.setText(firstData["dpLutime"] as? String)
+                etLukals.setText(firstData["dpLukals"] as? String)
+                etLuRemark.setText(firstData["dpLuRemark"] as? String)
+                etDntime.setText(firstData["dpDntime"] as? String)
+                etDnkals.setText(firstData["dpDnkals"] as? String)
+                etDnRemark.setText(firstData["dpDnRemark"] as? String)
         }
         }
 
@@ -132,15 +131,16 @@ class DietPlanAddFragment : Fragment() {
                     val dataForTheDay = bundle.getSerializable("dayData") as? List<Map<String, Any>>
                     var ownerName: String? = null
                     var day: String? = null
-                    if (dataForTheDay != null) {
+                    if (dataForTheDay != null && dataForTheDay.isNotEmpty()) {
+                        for ((index, dataMap) in dataForTheDay.withIndex()) {
+                            Log.d("Debug", "test Map value at index $index: $dataMap")
+                        }
                         for (dataMap in dataForTheDay) {
                             ownerName = dataMap["dpOwnerName"] as? String
                             day = dataMap["dpDietDays"] as? String
-
-                            if (ownerName != null && day != null) {
-                                break // Exit loop if both ownerName and day are found
-                            }
+                            if (ownerName != null && day != null) {break }// Exit loop
                         }
+                        Log.d("testvalue", "ownername = $ownerName , $day")
                     }
                 if(dataForTheDay != null && dataForTheDay.isNotEmpty()){
                     // Update existing data
