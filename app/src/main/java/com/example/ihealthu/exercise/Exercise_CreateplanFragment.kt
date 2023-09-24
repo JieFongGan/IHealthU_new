@@ -18,7 +18,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-
 class Exercise_CreateplanFragment : Fragment() {
 
     val db = Firebase.firestore
@@ -31,6 +30,7 @@ class Exercise_CreateplanFragment : Fragment() {
         return view
     }
 
+    val ownerName = "jian"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,79 +40,77 @@ class Exercise_CreateplanFragment : Fragment() {
         val inputnewplandescription: EditText = view.findViewById(R.id.input_newplan_description)
 
         btnimporteplan.setOnClickListener {
-            val exerciseInput1: EditText = view.findViewById(R.id.dailye1_input)
-            val timeInput1: EditText = view.findViewById(R.id.dailyt1_input)
-            val exerciseInput2: EditText = view.findViewById(R.id.dailye2_input)
-            val timeInput2: EditText = view.findViewById(R.id.dailyt2_input)
-            val exerciseInput3: EditText = view.findViewById(R.id.dailye3_input)
-            val timeInput3: EditText = view.findViewById(R.id.dailyt3_input)
-            val exerciseInput4: EditText = view.findViewById(R.id.dailye4_input)
-            val timeInput4: EditText = view.findViewById(R.id.dailyt4_input)
-            val exerciseInput5: EditText = view.findViewById(R.id.dailye5_input)
-            val timeInput5: EditText = view.findViewById(R.id.dailyt5_input)
-            val exerciseInput6: EditText = view.findViewById(R.id.dailye6_input)
-            val timeInput6: EditText = view.findViewById(R.id.dailyt6_input)
-            val exerciseInput7: EditText = view.findViewById(R.id.dailye7_input)
-            val timeInput7: EditText = view.findViewById(R.id.dailyt7_input)
+            val exerciseInput: List<EditText> = listOf(
+                view.findViewById(R.id.dailye1_input),
+                view.findViewById(R.id.dailye2_input),
+                view.findViewById(R.id.dailye3_input),
+                view.findViewById(R.id.dailye4_input),
+                view.findViewById(R.id.dailye5_input),
+                view.findViewById(R.id.dailye6_input),
+                view.findViewById(R.id.dailye7_input)
+            )
+
+            val timeInput: List<EditText> = listOf(
+                view.findViewById(R.id.dailyt1_input),
+                view.findViewById(R.id.dailyt2_input),
+                view.findViewById(R.id.dailyt3_input),
+                view.findViewById(R.id.dailyt4_input),
+                view.findViewById(R.id.dailyt5_input),
+                view.findViewById(R.id.dailyt6_input),
+                view.findViewById(R.id.dailyt7_input)
+            )
 
             val newPlanName = inputNewPlanName.text.toString()
             val newPlandescription = inputnewplandescription.text.toString()
-            val ei1 = exerciseInput1.text.toString()
-            val et1 = timeInput1.text.toString()
 
-            val ei2 = exerciseInput2.text.toString()
-            val et2 = timeInput2.text.toString()
-
-            val ei3 = exerciseInput3.text.toString()
-            val et3 = timeInput3.text.toString()
-
-            val ei4 = exerciseInput4.text.toString()
-            val et4 = timeInput4.text.toString()
-
-            val ei5 = exerciseInput5.text.toString()
-            val et5 = timeInput5.text.toString()
-
-            val ei6 = exerciseInput6.text.toString()
-            val et6 = timeInput6.text.toString()
-
-            val ei7 = exerciseInput7.text.toString()
-            val et7 = timeInput7.text.toString()
+            val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
             val data = hashMapOf(
                 "epID" to newPlanName,
                 "epDesc" to newPlandescription,
-                "epOwner" to "jian",
-                "epMon" to ei1,
-                "eptMon" to et1,
-                "epTue" to ei2,
-                "eptTue" to et2,
-                "epWed" to ei3,
-                "eptWed" to et3,
-                "epThu" to ei4,
-                "eptThu" to et4,
-                "epFri" to ei5,
-                "eptFri" to et5,
-                "epSat" to ei6,
-                "eptSat" to et6,
-                "epSun" to ei7,
-                "eptSun" to et7
+                "epOwner" to ownerName
             )
 
-            db.collection("exercise")
-                .add(data)
+            // Add a new document with epID, epDesc, and epOwner
+            val newDocumentRef = db.collection("exercise").add(data)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                    val fragmentManager = parentFragmentManager
-                    val fragmentTransaction = fragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.framelayout_activitymain, ExerciseFragment())
-                    fragmentTransaction.addToBackStack(null)
-                    fragmentTransaction.commit()
+
+                    // Now, create a subcollection for daysOfWeek under the newly created document
+                    val daysCollection = documentReference.collection("DaysOfWeek")
+
+                    for (day in daysOfWeek) {
+                        val ei = exerciseInput[daysOfWeek.indexOf(day)].text.toString()
+                        val et = timeInput[daysOfWeek.indexOf(day)].text.toString()
+
+                        val exerciseData = hashMapOf(
+                            "epContent" to ei,
+                            "eptTime" to et
+                        )
+
+                        // Add the data for the day into the subcollection
+                        daysCollection.document(day).set(exerciseData)
+                            .addOnSuccessListener {
+                                Log.d(TAG, "Data added for $day")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w(TAG, "Error adding data for $day", e)
+                                Toast.makeText(context, "Failed to add data for $day, try again", Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 }
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error adding document", e)
-                    Toast.makeText(context, "failed, try again", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Failed to add document, try again", Toast.LENGTH_SHORT).show()
                 }
+
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, ExerciseFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
+
         btncancel.setOnClickListener {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
