@@ -37,7 +37,7 @@ class DietPlanAddFragment : Fragment() {
     private lateinit var comfirmAdd: Button
     private lateinit var cancelAdd: Button
 
-    private lateinit var documentId: String
+    private var documentId: String?=null
 
     val db = Firebase.firestore
 
