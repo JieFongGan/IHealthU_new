@@ -65,7 +65,8 @@ class DietPlanAddFragment : Fragment() {
             etDietDays = selectedDay.toString()
         }
         //get the existing data documentID
-        val documentId = arguments?.getString("documentId")
+        val documentIds = arguments?.getString("documentId")
+        documentId = documentIds.toString()
         //ettexthold to existing data
         val dataForTheDay = arguments?.getSerializable("dayData") as? List<Map<String, Any>>
         if (dataForTheDay != null && dataForTheDay.isNotEmpty()) {

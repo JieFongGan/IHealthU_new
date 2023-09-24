@@ -149,9 +149,7 @@ class DietPlanFragment : Fragment() {
                         for (document in querySnapshot) {
                             documentId = document.id
                         }
-                    }
-                    .await()
-
+                    }.await()
                 for (document in querySnapshot.documents) {
                     Log.d("Firestore", "Document ID: ${document.id} => Document Data: ${document.data}")
                     val data = document.data
