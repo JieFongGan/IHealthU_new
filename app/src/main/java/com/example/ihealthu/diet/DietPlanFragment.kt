@@ -100,8 +100,6 @@ class DietPlanFragment : Fragment() {
                         fetchDataFromFirestore(theday, etOwnerName)
                     val documentIdp = documentId
                     Log.d("Firestore", "Document ID set to inedit button: $documentIdp")
-                    val bundle = Bundle()
-
                     setFragmentResult("dietPlanData", bundleOf("dayData" to dataForTheDay as Serializable))
                     setFragmentResult("documentId", bundleOf("docID" to documentIdp))
 //                    bundle.putSerializable("dayData",dataForTheDay as Serializable)
@@ -168,15 +166,15 @@ class DietPlanFragment : Fragment() {
                         for (document in querySnapshot) {
                             documentId = document.id
                             Log.d("Firestore", "Document ID set to: $documentId")
+                            for (document in querySnapshot.documents) {
+                                Log.d("Firestore", "Document ID: ${document.id} => Document Data: ${document.data}")
+                                val data = document.data
+                                if (data != null) {
+                                    dietDataList.add(data)
+                                }
+                            }
                         }
                     }.await()
-                for (document in querySnapshot.documents) {
-                    Log.d("Firestore", "Document ID: ${document.id} => Document Data: ${document.data}")
-                    val data = document.data
-                    if (data != null) {
-                        dietDataList.add(data)
-                    }
-                }
             } catch (e: Exception) {
                 Log.e("DietPlanFragment", "Error fetching data: ${e.message}")
             }

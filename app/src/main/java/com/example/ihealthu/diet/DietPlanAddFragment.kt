@@ -128,25 +128,45 @@ class DietPlanAddFragment : Fragment() {
                     "dpDnkals" to txDnkals,
                     "dpDnRemark" to txDnRemark
                 )
-                if(documentId !=null){
+                parentFragmentManager.setFragmentResultListener("dietPlanData", this) { _, bundle ->
+                    val dataForTheDay = bundle.getSerializable("dayData") as? List<Map<String, Any>>
+                    var ownerName: String? = null
+                    var day: String? = null
+                    if (dataForTheDay != null) {
+                        for (dataMap in dataForTheDay) {
+                            ownerName = dataMap["dpOwnerName"] as? String
+                            day = dataMap["dpDietDays"] as? String
+
+                            if (ownerName != null && day != null) {
+                                break // Exit loop if both ownerName and day are found
+                            }
+                        }
+                    }
+                if(dataForTheDay != null && dataForTheDay.isNotEmpty()){
                     // Update existing data
                     db.collection("diet")
-                        .document(documentId!!)
-                        .set(data)
-                        .addOnSuccessListener {
-                            Toast.makeText(view.context,"data updated",Toast.LENGTH_SHORT).show()
-                            val fragmentManager = parentFragmentManager
-                            val fragmentTransaction = fragmentManager.beginTransaction()
-                            fragmentTransaction.replace(
-                                R.id.framelayout_activitymain,
-                                DietPlanFragment()
-                            )
-                            fragmentTransaction.addToBackStack(null)
-                            fragmentTransaction.commit()
-                        }
-                        .addOnFailureListener { e ->
+                        .whereEqualTo("ownername", ownerName)
+                        .whereEqualTo("Day", day)
+                        .get()
+                        .addOnSuccessListener {querySnapshot ->
+                            val document = querySnapshot.documents[0]
+                                db.collection("diet")
+                                .document(document.id)
+                                .set(data)
+                                .addOnSuccessListener {
+                                    Toast.makeText(view.context,"data updated",Toast.LENGTH_SHORT).show()
+                                    val fragmentManager = parentFragmentManager
+                                    val fragmentTransaction = fragmentManager.beginTransaction()
+                                    fragmentTransaction.replace(
+                                        R.id.framelayout_activitymain,
+                                        DietPlanFragment()
+                                    )
+                                    fragmentTransaction.addToBackStack(null)
+                                    fragmentTransaction.commit()
+                                }
+                        }.addOnFailureListener { e ->
                             Log.w(ContentValues.TAG, "Error adding document", e)
-                            Toast.makeText(context, "failed, try again", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "updated failed, try again", Toast.LENGTH_SHORT).show()
                         }
                 }else{
                 db.collection("diet")
@@ -170,7 +190,7 @@ class DietPlanAddFragment : Fragment() {
                         Log.w(ContentValues.TAG, "Error adding document", e)
                         Toast.makeText(context, "failed, try again", Toast.LENGTH_SHORT).show()
                     }
-                }
+                }}
             }catch(e: Exception){
                 Log.e("FirestoreError", "Exception: ", e)
             }
