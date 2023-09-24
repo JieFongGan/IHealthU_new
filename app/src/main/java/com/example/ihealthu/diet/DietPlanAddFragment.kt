@@ -149,6 +149,7 @@ class DietPlanAddFragment : Fragment() {
                         .whereEqualTo("Day", day)
                         .get()
                         .addOnSuccessListener {querySnapshot ->
+                            if (querySnapshot.documents.isNotEmpty()) {
                             val document = querySnapshot.documents[0]
                                 db.collection("diet")
                                 .document(document.id)
@@ -162,8 +163,8 @@ class DietPlanAddFragment : Fragment() {
                                         DietPlanFragment()
                                     )
                                     fragmentTransaction.addToBackStack(null)
-                                    fragmentTransaction.commit()
-                                }
+                                    fragmentTransaction.commit()}
+                            }
                         }.addOnFailureListener { e ->
                             Log.w(ContentValues.TAG, "Error adding document", e)
                             Toast.makeText(context, "updated failed, try again", Toast.LENGTH_SHORT).show()
