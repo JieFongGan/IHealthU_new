@@ -21,6 +21,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.io.Serializable
+import kotlinx.coroutines.*
 
 class DietPlanFragment : Fragment() {
 
@@ -35,9 +37,15 @@ class DietPlanFragment : Fragment() {
     private lateinit var dogSat: Button
     private lateinit var dogSun: Button
     private lateinit var dogEdit: Button
+    private lateinit var dogDelete: Button
+    private lateinit var theday: String
+
+    private lateinit var dogSearch: Button
 
     //user name
     private lateinit var etOwnerName: String
+
+    private lateinit var documentId: String
 
     val db = Firebase.firestore
 
@@ -49,6 +57,7 @@ class DietPlanFragment : Fragment() {
         dogRecyclerView = binding.dogRecyclerView
         //user name
         etOwnerName = "TestName123"
+        theday = "Mon"
 
         dogMon = binding.dogMon
         dogTue = binding.dogTue
@@ -59,6 +68,9 @@ class DietPlanFragment : Fragment() {
         dogSun = binding.dogSun
 
         dogEdit = binding.dogEdit
+        dogDelete = binding.dogDelete
+
+        dogSearch = binding.dogSearch
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,9 +90,21 @@ class DietPlanFragment : Fragment() {
         binding.dogSat.setOnClickListener { loadDataForDay("Sat",etOwnerName) }
         binding.dogSun.setOnClickListener { loadDataForDay("Sun",etOwnerName) }
 
-        // DietPlanAddFragment
+        // Edit button DietPlanAddFragment
         dogEdit.setOnClickListener {
             try {
+                // Fetch data for the day
+                lifecycleScope.launch {
+                    val dataForTheDay: List<Map<String, Any>> =
+                        fetchDataFromFirestore(theday, etOwnerName)
+                    val documentIdp = documentId
+                    val bundle = Bundle()
+                    bundle.putSerializable(
+                        "dayData",
+                        dataForTheDay as Serializable
+                    )
+                    bundle.putString("documentId", documentIdp)
+                }//navi to PlanAdd
                 val fragmentManager = parentFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.framelayout_activitymain, DietPlanAddFragment())
@@ -90,11 +114,24 @@ class DietPlanFragment : Fragment() {
                 Log.e("FragmentTransaction", "Error: ${e.message}")
             }
         }
+        //DietPlanDelete
+        dogDelete.setOnClickListener {
+            try{
+                lifecycleScope.launch {
+                    deleteDataFromFirestore(theday, etOwnerName)
+                }
+            }catch (e: Exception) {
+                Log.e("DietPlanFragment", "Error deleting data: ${e.message}")
+        }
+        }
+        //DietPlanSearch
     }
+    //weekly button fetch data
     private fun loadDataForDay(day: String, ownerName: String) {
         lifecycleScope.launch {
             val data = fetchDataFromFirestore(day,ownerName)
             //chg the value
+            theday = day
             setFragmentResult("selectedDay", bundleOf("day" to day))
             //submitList
             (dogRecyclerView.adapter as DietPlanAdapter).submitList(data)
@@ -108,6 +145,11 @@ class DietPlanFragment : Fragment() {
                     .whereEqualTo("dpDietDays", day)
                     .whereEqualTo("dpOwnerName", ownerName)
                     .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        for (document in querySnapshot) {
+                            documentId = document.id
+                        }
+                    }
                     .await()
 
                 for (document in querySnapshot.documents) {
@@ -123,4 +165,24 @@ class DietPlanFragment : Fragment() {
             return@withContext dietDataList
         }
     }
+    //delete method
+    private suspend fun deleteDataFromFirestore(day: String, ownerName: String) {
+        withContext(Dispatchers.IO) {
+            try {
+                val querySnapshot = db.collection("diet")
+                    .whereEqualTo("dpDietDays", day)
+                    .whereEqualTo("dpOwnerName", ownerName)
+                    .get()
+                    .await()
+
+                for (document in querySnapshot.documents) {
+                    db.collection("diet").document(document.id).delete().await()
+                    Log.d("DietPlanFragment", "Document with ID: ${document.id} deleted.")
+                }
+            } catch (e: Exception) {
+                Log.e("DietPlanFragment", "Error deleting data: ${e.message}")
+            }
+        }
+    }
+
 }

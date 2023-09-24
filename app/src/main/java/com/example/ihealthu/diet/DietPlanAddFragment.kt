@@ -40,6 +40,8 @@ class DietPlanAddFragment : Fragment() {
     private lateinit var comfirmAdd: Button
     private lateinit var cancelAdd: Button
 
+    private lateinit var documentId: String
+
     val db = Firebase.firestore
 
 
@@ -65,6 +67,23 @@ class DietPlanAddFragment : Fragment() {
             val selectedDay = bundle.getString("day")
             etDietDays = selectedDay.toString()
         }
+        //get the existing data documentID
+        val documentId = arguments?.getString("documentId")
+        //ettexthold to existing data
+        val dataForTheDay = arguments?.getSerializable("dayData") as? List<Map<String, Any>>
+        if (dataForTheDay != null && dataForTheDay.isNotEmpty()) {
+            val firstData = dataForTheDay.first()
+            etPlanPP.setText(firstData["dpPlanPP"] as? String)
+            etBftime.setText(firstData["dpBftime"] as? String)
+            etBfkals.setText(firstData["dpBfkals"] as? String)
+            etBfRemark.setText(firstData["dpBfRemark"] as? String)
+            etBftime.setText(firstData["dpLutime"] as? String)
+            etBfkals.setText(firstData["dpLukals"] as? String)
+            etBfRemark.setText(firstData["dpLuRemark"] as? String)
+            etBftime.setText(firstData["dpDntime"] as? String)
+            etBfkals.setText(firstData["dpDnkals"] as? String)
+            etBfRemark.setText(firstData["dpDnRemark"] as? String)
+        }
 
         comfirmAdd = binding.confirmPlanAdd
         cancelAdd = binding.cancelPlanAdd
@@ -77,7 +96,7 @@ class DietPlanAddFragment : Fragment() {
         //add data xxx!!!!!!!!!!!!!!
         comfirmAdd.setOnClickListener{
             try {
-                Log.d("Debug", "Inside onClickListener")
+                Log.d("Debug", "comfirmAdd got run")
                 val txplanPP = etPlanPP.text.toString()
                 val txBftime = etBftime.text.toString()
                 val txBfkals = etBfkals.text.toString()
@@ -106,6 +125,27 @@ class DietPlanAddFragment : Fragment() {
                     "dpDnkals" to txDnkals,
                     "dpDnRemark" to txDnRemark
                 )
+                if(documentId !=null){
+                    // Update existing data
+                    db.collection("diet")
+                        .document(documentId!!)
+                        .set(data)
+                        .addOnSuccessListener {
+                            Toast.makeText(view.context,"data updated",Toast.LENGTH_SHORT).show()
+                            val fragmentManager = parentFragmentManager
+                            val fragmentTransaction = fragmentManager.beginTransaction()
+                            fragmentTransaction.replace(
+                                R.id.framelayout_activitymain,
+                                DietPlanFragment()
+                            )
+                            fragmentTransaction.addToBackStack(null)
+                            fragmentTransaction.commit()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(ContentValues.TAG, "Error adding document", e)
+                            Toast.makeText(context, "failed, try again", Toast.LENGTH_SHORT).show()
+                        }
+                }else{
                 db.collection("diet")
                     .add(data)
                     .addOnSuccessListener { documentReference ->
@@ -127,6 +167,7 @@ class DietPlanAddFragment : Fragment() {
                         Log.w(ContentValues.TAG, "Error adding document", e)
                         Toast.makeText(context, "failed, try again", Toast.LENGTH_SHORT).show()
                     }
+                }
             }catch(e: Exception){
                 Log.e("FirestoreError", "Exception: ", e)
             }

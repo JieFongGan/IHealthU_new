@@ -5,6 +5,18 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today's Plan Purpose/Description"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/ppPDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ppPDesc" />
+
     <!-- Breakfast Section -->
     <TextView
         android:layout_width="wrap_content"
