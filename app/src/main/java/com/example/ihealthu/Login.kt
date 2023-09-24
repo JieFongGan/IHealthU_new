@@ -9,7 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class Login : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
-    public lateinit var binding: LoginBinding
+    private lateinit var binding: LoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
