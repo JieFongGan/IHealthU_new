@@ -37,7 +37,7 @@ class ExerciseFragment : Fragment() {
     private lateinit var btntomyeplan: Button
     private lateinit var btntosearcheplan: Button
     private lateinit var daytabLayout: TabLayout
-    private var selectedDay: String = ""
+    private var selectedDay: String = "Mon"
     private lateinit var exerciseAdapter: ExercisePlanAdapter
 
     //7day button
@@ -49,8 +49,6 @@ class ExerciseFragment : Fragment() {
     private lateinit var btnsaturday: Button
     private lateinit var btnsunday: Button
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,6 +58,8 @@ class ExerciseFragment : Fragment() {
         dailyRecyclerView = view.findViewById(R.id.dailyeg_View)
         btntomyeplan = view.findViewById(R.id.btn_myeplan)
         btntosearcheplan = view.findViewById(R.id.btn_searcheplan)
+
+        loadDataForDay(selectedDay, "jian")
 
         //7day button
         btnmonday = view.findViewById(R.id.btn_monday )
@@ -80,16 +80,40 @@ class ExerciseFragment : Fragment() {
         exerciseAdapter = ExercisePlanAdapter(emptyList<Map<String, Any>>().toMutableList(), selectedDay)
         dailyRecyclerView.adapter = exerciseAdapter
 
-//        loadDataForDay(selectedDay, "jian")
+        btnmonday.setOnClickListener {
+            selectedDay = "Mon"
+            loadDataForDay(selectedDay, "jian")
+        }
 
-        btnmonday.setOnClickListener { loadDataForDay("Mon", "jian") }
-        btntuesday.setOnClickListener { loadDataForDay("Tue", "jian") }
-        btnwednesday.setOnClickListener { loadDataForDay("Wed", "jian") }
-        btnthursday.setOnClickListener { loadDataForDay("Thu", "jian") }
-        btnfriday.setOnClickListener { loadDataForDay("Fri", "jian") }
-        btnsaturday.setOnClickListener { loadDataForDay("Sat", "jian") }
-        btnsunday.setOnClickListener { loadDataForDay("Sun", "jian") }
+        btntuesday.setOnClickListener {
+            selectedDay = "Tue"
+            loadDataForDay(selectedDay, "jian")
+        }
 
+        btnwednesday.setOnClickListener {
+            selectedDay = "Wed"
+            loadDataForDay(selectedDay, "jian")
+        }
+
+        btnthursday.setOnClickListener {
+            selectedDay = "Thu"
+            loadDataForDay(selectedDay, "jian")
+        }
+
+        btnfriday.setOnClickListener {
+            selectedDay = "Fri"
+            loadDataForDay(selectedDay, "jian")
+        }
+
+        btnsaturday.setOnClickListener {
+            selectedDay = "Sat"
+            loadDataForDay(selectedDay, "jian")
+        }
+
+        btnsunday.setOnClickListener {
+            selectedDay = "Sun"
+            loadDataForDay(selectedDay, "jian")
+        }
 
         btntomyeplan.setOnClickListener {
             val fragmentManager = parentFragmentManager
@@ -112,7 +136,7 @@ class ExerciseFragment : Fragment() {
         lifecycleScope.launch {
             val data = fetchDataFromFirestore(day, ownerName)
             setFragmentResult("selectedDay", bundleOf("day" to day))
-            (dailyRecyclerView.adapter as ExercisePlanAdapter).submitList(data)
+            exerciseAdapter.submitList(data)
         }
     }
 
@@ -122,11 +146,26 @@ class ExerciseFragment : Fragment() {
             try {
                 val querySnapshot = db.collection("exercise")
                     .whereEqualTo("epOwner", ownerName)
+                    .whereEqualTo("status", "yes")
                     .get()
                     .await()
 
                 for (document in querySnapshot.documents) {
+                    // Fetch data from the main document
                     val data = document.data
+
+                    // Retrieve data for the selected day from the subcollection
+                    val subdocument = document.reference
+                        .collection("DaysOfWeek")
+                        .document(day)
+                        .get()
+                        .await()
+
+                    val subdocumentData = subdocument.data
+                    if (subdocumentData != null) {
+                        data?.putAll(subdocumentData)
+                    }
+
                     if (data != null) {
                         exerciseDataList.add(data)
                     }
