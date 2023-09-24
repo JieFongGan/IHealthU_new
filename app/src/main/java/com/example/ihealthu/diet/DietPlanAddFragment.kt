@@ -79,12 +79,12 @@ class DietPlanAddFragment : Fragment() {
             etBftime.setText(firstData["dpBftime"] as? String)
             etBfkals.setText(firstData["dpBfkals"] as? String)
             etBfRemark.setText(firstData["dpBfRemark"] as? String)
-            etBftime.setText(firstData["dpLutime"] as? String)
-            etBfkals.setText(firstData["dpLukals"] as? String)
-            etBfRemark.setText(firstData["dpLuRemark"] as? String)
-            etBftime.setText(firstData["dpDntime"] as? String)
-            etBfkals.setText(firstData["dpDnkals"] as? String)
-            etBfRemark.setText(firstData["dpDnRemark"] as? String)
+            etLutime.setText(firstData["dpLutime"] as? String)
+            etLukals.setText(firstData["dpLukals"] as? String)
+            etLuRemark.setText(firstData["dpLuRemark"] as? String)
+            etDntime.setText(firstData["dpDntime"] as? String)
+            etDnkals.setText(firstData["dpDnkals"] as? String)
+            etDnRemark.setText(firstData["dpDnRemark"] as? String)
         }
         }
 

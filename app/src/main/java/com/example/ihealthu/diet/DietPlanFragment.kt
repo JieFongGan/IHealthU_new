@@ -23,6 +23,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.io.Serializable
 import kotlinx.coroutines.*
+import android.app.AlertDialog
 
 class DietPlanFragment : Fragment() {
 
@@ -117,16 +118,33 @@ class DietPlanFragment : Fragment() {
         }
         //DietPlanDelete
         dogDelete.setOnClickListener {
-            try{
-                lifecycleScope.launch {
-                    deleteDataFromFirestore(theday, etOwnerName)
+            // Create an AlertDialog Builder
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Delete Confirmation")
+            builder.setMessage("Are you sure you want to delete this data?")
+            // Add "Yes" button
+            builder.setPositiveButton("Yes") { dialog, which ->
+                try {
+                    lifecycleScope.launch {
+                        deleteDataFromFirestore(theday, etOwnerName)
+                    }
+                } catch (e: Exception) {
+                    Log.e("DietPlanFragment", "Error deleting data: ${e.message}")
                 }
-            }catch (e: Exception) {
-                Log.e("DietPlanFragment", "Error deleting data: ${e.message}")
-        }
+            }
+            // Add "No" button
+            builder.setNegativeButton("No") { dialog, which ->
+                // Do nothing
+            }
+            // Create and show the dialog
+            val dialog = builder.create()
+            dialog.show()
         }
         //DietPlanSearch
-    }
+        dogSearch.setOnClickListener{
+
+        }
+    }//end of OnCreate View
     //weekly button fetch data
     private fun loadDataForDay(day: String, ownerName: String) {
         lifecycleScope.launch {
