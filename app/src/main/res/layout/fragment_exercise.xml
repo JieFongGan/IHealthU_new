@@ -5,13 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".exercise.ExerciseFragment">
 
-    <!--    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/title_exercise"
-            android:textSize="34sp" />-->
-
     <ScrollView
         android:id="@+id/scroll_exercise"
         android:layout_width="match_parent"

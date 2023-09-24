@@ -13,9 +13,6 @@ import android.widget.Toast
 import com.example.ihealthu.MainActivity
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentDietPlanAddBinding
-import com.example.ihealthu.databinding.FragmentDietPlanBinding
-import com.example.ihealthu.exercise.ExerciseFragment
-import com.example.ihealthu.exercise.Exercise_MyplanFragment
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 

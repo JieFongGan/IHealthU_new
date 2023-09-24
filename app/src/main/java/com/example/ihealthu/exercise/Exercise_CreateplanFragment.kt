@@ -1,5 +1,6 @@
 package com.example.ihealthu.exercise
 
+import Exercise_MyplanFragment
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -21,8 +22,6 @@ import com.google.firebase.ktx.Firebase
 class Exercise_CreateplanFragment : Fragment() {
 
     val db = Firebase.firestore
-    private lateinit var viewPager: ViewPager
-    private lateinit var adapter: Create_exAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,53 +38,6 @@ class Exercise_CreateplanFragment : Fragment() {
         val btnimporteplan : Button = view.findViewById(R.id.btn_importeplan)
         val inputNewPlanName: EditText = view.findViewById(R.id.input_newplanname)
         val inputnewplandescription: EditText = view.findViewById(R.id.input_newplan_description)
-
-
-
-        //7 day button
-        val btnMonday: Button = view.findViewById(R.id.btn_monday)
-        val btnTuesday: Button = view.findViewById(R.id.btn_tuesday)
-        val btnWednesday: Button = view.findViewById(R.id.btn_wednesday)
-        val btnThursday: Button = view.findViewById(R.id.btn_thursday)
-        val btnFriday: Button = view.findViewById(R.id.btn_friday)
-        val btnSaturday: Button = view.findViewById(R.id.btn_saturday)
-        val btnSunday: Button = view.findViewById(R.id.btn_sunday)
-
-        viewPager = view.findViewById(R.id.view_pager)
-        adapter = Create_exAdapter(childFragmentManager)
-        viewPager.adapter = adapter
-
-        viewPager.currentItem = 0
-
-        btnMonday.setOnClickListener {
-            viewPager.currentItem = 0
-        }
-
-        btnTuesday.setOnClickListener {
-            viewPager.currentItem = 1
-        }
-
-        btnWednesday.setOnClickListener {
-            viewPager.currentItem = 2
-        }
-
-        btnThursday.setOnClickListener {
-            viewPager.currentItem = 3
-        }
-
-        btnFriday.setOnClickListener {
-            viewPager.currentItem = 4
-        }
-
-        btnSaturday.setOnClickListener {
-            viewPager.currentItem = 5
-        }
-
-        btnSunday.setOnClickListener {
-            viewPager.currentItem = 6
-        }
-
-
 
         btnimporteplan.setOnClickListener {
             val exerciseInput1: EditText = view.findViewById(R.id.dailye1_input)
@@ -107,16 +59,22 @@ class Exercise_CreateplanFragment : Fragment() {
             val newPlandescription = inputnewplandescription.text.toString()
             val ei1 = exerciseInput1.text.toString()
             val et1 = timeInput1.text.toString()
+
             val ei2 = exerciseInput2.text.toString()
             val et2 = timeInput2.text.toString()
+
             val ei3 = exerciseInput3.text.toString()
             val et3 = timeInput3.text.toString()
+
             val ei4 = exerciseInput4.text.toString()
             val et4 = timeInput4.text.toString()
+
             val ei5 = exerciseInput5.text.toString()
             val et5 = timeInput5.text.toString()
+
             val ei6 = exerciseInput6.text.toString()
             val et6 = timeInput6.text.toString()
+
             val ei7 = exerciseInput7.text.toString()
             val et7 = timeInput7.text.toString()
 
@@ -156,9 +114,6 @@ class Exercise_CreateplanFragment : Fragment() {
                 }
         }
         btncancel.setOnClickListener {
-            val exerciseInput7: EditText = view.findViewById(R.id.dailye7_input)
-            Toast.makeText(context, "failed, try again $exerciseInput7", Toast.LENGTH_SHORT).show()
-
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
