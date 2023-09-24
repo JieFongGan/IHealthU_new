@@ -133,19 +133,16 @@ class DietPlanAddFragment : Fragment() {
                     if (dataForTheDayf != null && dataForTheDayf!!.isNotEmpty()) {
                         for ((index, dataMap) in dataForTheDayf!!.withIndex()) {
                             Log.d("Debug", "test Map value at index $index: $dataMap")
-                        }
-                        for (dataMap in dataForTheDayf!!) {
                             ownerName = dataMap["dpOwnerName"] as? String
                             day = dataMap["dpDietDays"] as? String
-                            if (ownerName != null && day != null) {break }// Exit loop
                         }
-                        Log.d("testvalue", "ownername = $ownerName , $day")
+                        Log.d("testvalue", "test value ownername = $ownerName , $day")
                     }
                     if(dataForTheDayf != null && dataForTheDayf!!.isNotEmpty()){
                         // Update existing data
                         db.collection("diet")
-                            .whereEqualTo("ownername", ownerName)
-                            .whereEqualTo("Day", day)
+                            .whereEqualTo("dpOwnerName", ownerName)
+                            .whereEqualTo("dpDietDays", day)
                             .get()
                             .addOnSuccessListener {querySnapshot ->
                                 if (querySnapshot.documents.isNotEmpty()) {
