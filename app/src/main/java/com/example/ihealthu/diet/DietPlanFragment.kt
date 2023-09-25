@@ -25,6 +25,7 @@ import java.io.Serializable
 import kotlinx.coroutines.*
 import android.app.AlertDialog
 import android.widget.Toast
+import com.example.ihealthu.EmailStore
 
 class DietPlanFragment : Fragment() {
 
@@ -58,7 +59,7 @@ class DietPlanFragment : Fragment() {
         _binding = FragmentDietPlanBinding.inflate(inflater, container, false)
         dogRecyclerView = binding.dogRecyclerView
         //user name
-        etOwnerName = "TestName123"
+        etOwnerName = EmailStore.globalEmail.toString()
         theday = "Mon"
 
         dogMon = binding.dogMon

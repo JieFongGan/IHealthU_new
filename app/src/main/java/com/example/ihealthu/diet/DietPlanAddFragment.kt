@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.ihealthu.EmailStore
 import com.example.ihealthu.MainActivity
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentDietPlanAddBinding
@@ -63,7 +64,7 @@ class DietPlanAddFragment : Fragment() {
         etDnkals = binding.editTextDinnerKals
         etDnRemark = binding.editTextDinnerRemark
 
-        etOwnerName = "TestName123"
+        etOwnerName = EmailStore.globalEmail.toString()
         //get value for weekly day
         parentFragmentManager.setFragmentResultListener("selectedDay", this) { _, bundle ->
             val selectedDay = bundle.getString("day")
