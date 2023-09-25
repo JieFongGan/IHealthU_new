@@ -11,8 +11,9 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/edit_vlayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -88,7 +89,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailye1_titile"
+                        android:id="@+id/edite1_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -96,7 +97,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailye1_input"
+                        android:id="@+id/edite1_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -112,7 +113,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailyt1_titile"
+                        android:id="@+id/editt1_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -120,7 +121,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailyt1_input"
+                        android:id="@+id/editt1_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -152,7 +153,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailye2_titile"
+                        android:id="@+id/edite2_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -160,7 +161,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailye2_input"
+                        android:id="@+id/edite2_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -176,7 +177,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailyt2_titile"
+                        android:id="@+id/editt2_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -184,7 +185,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailyt2_input"
+                        android:id="@+id/editt2_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -216,7 +217,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailye3_titile"
+                        android:id="@+id/edite3_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -224,7 +225,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailye3_input"
+                        android:id="@+id/edite3_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -240,7 +241,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailyt3_titile"
+                        android:id="@+id/editt3_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -248,7 +249,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailyt3_input"
+                        android:id="@+id/editt3_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -280,7 +281,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailye4_titile"
+                        android:id="@+id/edite4_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -288,7 +289,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailye4_input"
+                        android:id="@+id/edite4_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -304,7 +305,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailyt4_titile"
+                        android:id="@+id/editt4_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -312,7 +313,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailyt4_input"
+                        android:id="@+id/editt4_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -344,7 +345,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailye5_titile"
+                        android:id="@+id/edite5_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -352,7 +353,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailye5_input"
+                        android:id="@+id/edite5_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -368,7 +369,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailyt5_titile"
+                        android:id="@+id/editt5_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -376,7 +377,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailyt5_input"
+                        android:id="@+id/editt5_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -408,7 +409,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailye6_titile"
+                        android:id="@+id/edite6_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -416,7 +417,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailye6_input"
+                        android:id="@+id/edite6_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -432,7 +433,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailyt6_titile"
+                        android:id="@+id/editt6_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -440,7 +441,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailyt6_input"
+                        android:id="@+id/editt6_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -472,7 +473,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailye7_titile"
+                        android:id="@+id/edite7_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -480,7 +481,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailye7_input"
+                        android:id="@+id/edite7_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
@@ -496,7 +497,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/dailyt7_titile"
+                        android:id="@+id/editt7_titile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
@@ -504,7 +505,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/dailyt7_input"
+                        android:id="@+id/editt7_input"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
