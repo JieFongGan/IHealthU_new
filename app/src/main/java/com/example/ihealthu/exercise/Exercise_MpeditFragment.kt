@@ -1,5 +1,6 @@
 package com.example.ihealthu.exercise
 
+import Exercise_MyplanFragment
 import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
@@ -162,6 +163,11 @@ class Exercise_MpeditFragment : Fragment() {
                         docRef.set(dataToUpdate)
                             .addOnSuccessListener {
                                 Log.d("MyePlanFragment", "Data for $day updated successfully.")
+                                val fragmentManager = parentFragmentManager
+                                val fragmentTransaction = fragmentManager.beginTransaction()
+                                fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
+                                fragmentTransaction.addToBackStack(null)
+                                fragmentTransaction.commit()
                             }
                             .addOnFailureListener { e ->
                                 Log.e("MyePlanFragment", "Error updating data for $day: ${e.message}")

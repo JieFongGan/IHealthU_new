@@ -13,6 +13,8 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ihealthu.EmailStore
+import com.example.ihealthu.EmailStore.globalEmail
 import com.example.ihealthu.R
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.ktx.firestore
@@ -32,6 +34,7 @@ class ExerciseFragment : Fragment() {
     private lateinit var daytabLayout: TabLayout
     private var selectedDay: String = "Mon"
     private lateinit var exerciseAdapter: ExercisePlanAdapter
+    private lateinit var OwnerName: String
 
     //7day button
     private lateinit var btnmonday: Button
@@ -51,8 +54,9 @@ class ExerciseFragment : Fragment() {
         dailyRecyclerView = view.findViewById(R.id.dailyeg_View)
         btntomyeplan = view.findViewById(R.id.btn_myeplan)
         btntosearcheplan = view.findViewById(R.id.btn_searcheplan)
+        OwnerName = EmailStore.globalEmail.toString()
 
-        loadDataForDay(selectedDay, "jian")
+        loadDataForDay(selectedDay, OwnerName)
 
         //7day button
         btnmonday = view.findViewById(R.id.btn_monday )
@@ -75,37 +79,37 @@ class ExerciseFragment : Fragment() {
 
         btnmonday.setOnClickListener {
             selectedDay = "Mon"
-            loadDataForDay(selectedDay, "jian")
+            loadDataForDay(selectedDay, OwnerName)
         }
 
         btntuesday.setOnClickListener {
             selectedDay = "Tue"
-            loadDataForDay(selectedDay, "jian")
+            loadDataForDay(selectedDay, OwnerName)
         }
 
         btnwednesday.setOnClickListener {
             selectedDay = "Wed"
-            loadDataForDay(selectedDay, "jian")
+            loadDataForDay(selectedDay, OwnerName)
         }
 
         btnthursday.setOnClickListener {
             selectedDay = "Thu"
-            loadDataForDay(selectedDay, "jian")
+            loadDataForDay(selectedDay, OwnerName)
         }
 
         btnfriday.setOnClickListener {
             selectedDay = "Fri"
-            loadDataForDay(selectedDay, "jian")
+            loadDataForDay(selectedDay, OwnerName)
         }
 
         btnsaturday.setOnClickListener {
             selectedDay = "Sat"
-            loadDataForDay(selectedDay, "jian")
+            loadDataForDay(selectedDay, OwnerName)
         }
 
         btnsunday.setOnClickListener {
             selectedDay = "Sun"
-            loadDataForDay(selectedDay, "jian")
+            loadDataForDay(selectedDay, OwnerName)
         }
 
         btntomyeplan.setOnClickListener {
@@ -139,7 +143,7 @@ class ExerciseFragment : Fragment() {
             try {
                 val querySnapshot = db.collection("exercise")
                     .whereEqualTo("epOwner", ownerName)
-                    .whereEqualTo("status", "yes")
+                    .whereEqualTo("status", "Yes")
                     .get()
                     .await()
 
@@ -166,8 +170,13 @@ class ExerciseFragment : Fragment() {
             } catch (e: Exception) {
                 Log.e("ExerciseFragment", "Error fetching data: ${e.message}")
             }
+
+            // If exerciseDataList is empty, return a placeholder value indicating no plans
+            if (exerciseDataList.isEmpty()) {
+                exerciseDataList.add(mapOf("no_plans" to true))
+            }
+
             return@withContext exerciseDataList
         }
     }
-
 }

@@ -113,30 +113,6 @@
                     android:layout_gravity="center_vertical"
                     android:text="@string/my_plan" />
             </LinearLayout>
-
-            <!-- History -->
-            <LinearLayout
-                android:id="@+id/history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:id="@+id/newplan_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/history"
-                    android:textAlignment="center"
-                    android:textSize="20sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:listitem="@layout/list_exercisehistory" />
-
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 </FrameLayout>

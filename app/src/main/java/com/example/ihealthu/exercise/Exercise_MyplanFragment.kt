@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ihealthu.EmailStore
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentExerciseMyplanBinding
 import com.example.ihealthu.exercise.Exercise_CreateplanFragment
@@ -22,6 +23,7 @@ class Exercise_MyplanFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnneweplan: Button
+    private lateinit var OwnerName: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +32,7 @@ class Exercise_MyplanFragment : Fragment() {
         _binding = FragmentExerciseMyplanBinding.inflate(inflater, container, false)
         recyclerView = binding.MyplanView
         btnneweplan = binding.btnNeweplan
+        OwnerName = EmailStore.globalEmail.toString()
 
         return binding.root
     }
@@ -41,10 +44,10 @@ class Exercise_MyplanFragment : Fragment() {
         val myeplanAdapter = MyeplanAdapter(
             requireContext(),
             parentFragmentManager,
-            emptyList<Map<String, Any>>().toMutableList()
-        ) { position ->
-            deleteItem(position)
-        }
+            emptyList<Map<String, Any>>().toMutableList(),
+            this::deleteItem,
+            this::updateStatusInFirestore
+        )
 
         recyclerView.adapter = myeplanAdapter
 
@@ -56,10 +59,48 @@ class Exercise_MyplanFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
-        val ownerName = "jian"
-        fetchDataFromFirestore(ownerName) { data ->
+        fetchDataFromFirestore(OwnerName) { data ->
             myeplanAdapter.submitList(data)
         }
+    }
+
+    private fun updateStatusInFirestore(epID: String) {
+        val collectionName = "exercise"
+
+        db.collection(collectionName)
+            .whereEqualTo("epID", epID)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (!querySnapshot.isEmpty) {
+                    val document = querySnapshot.documents[0]
+
+                    val currentStatus = document.getString("status")
+
+                    val newStatus = if (currentStatus == "Yes") "No" else "Yes"
+
+                    // Update the "status" field in Firestore with the new value
+                    document.reference.update("status", newStatus)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "Status updated successfully to $newStatus")
+                            val fragmentManager = parentFragmentManager
+                            val fragmentTransaction = fragmentManager.beginTransaction()
+                            fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
+                            fragmentTransaction.addToBackStack(null)
+                            fragmentTransaction.commit()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e(TAG, "Status update failed: ${e.message}")
+                            Toast.makeText(requireContext(), "Status update failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Log.d(TAG, "No document found with epID: $epID")
+                    // Handle the case where no document with the specified epID is found
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Query failed: ${e.message}")
+                Toast.makeText(requireContext(), "Query failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun deleteItem(position: Int) {
