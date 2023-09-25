@@ -4,23 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".diet.DietSearchFragment">
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchPlanView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#CBFFBDBD" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dsRecyclerView"
+        <ListView
+            android:id="@+id/dsListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/searchPlanView"/>
-
-    </RelativeLayout>
-
-
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:listitem="@layout/list_item_diet_search"/>
+        <Button
+            android:id="@+id/dsBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            />
+    </LinearLayout>
 </FrameLayout>
