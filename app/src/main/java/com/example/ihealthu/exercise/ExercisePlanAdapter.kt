@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ihealthu.R
 import com.example.ihealthu.diet.DietPlanAdapter
 
-class ExercisePlanAdapter(private val exerciseplanlist: MutableList<Map<String, Any>>,
-                          private val selectedDay: String
+class ExercisePlanAdapter(
+    private val exerciseplanlist: MutableList<Map<String, Any>>,
+    private val selectedDay: String
 ) : RecyclerView.Adapter<ExercisePlanAdapter.ExerciseViewHolder>() {
 
     inner class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -27,9 +28,12 @@ class ExercisePlanAdapter(private val exerciseplanlist: MutableList<Map<String, 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
         val currentItem = exerciseplanlist[position]
 
-        holder.goalhour.text = currentItem["ept$selectedDay"]?.toString() ?: "N/A"
-        holder.goalexercise.text = currentItem["ep$selectedDay"]?.toString() ?: "N/A"
-        Log.d("DietPlanFragment", "fk $selectedDay")
+        // Assuming each item in the list corresponds to a day's document
+        val epContent = currentItem["epContent"]?.toString() ?: "N/A"
+        val epTime = currentItem["eptTime"]?.toString() ?: "N/A"
+
+        holder.goalhour.text = epTime
+        holder.goalexercise.text = epContent
     }
 
     fun submitList(newData: List<Map<String, Any>>) {

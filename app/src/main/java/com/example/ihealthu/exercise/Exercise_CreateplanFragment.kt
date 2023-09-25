@@ -68,7 +68,8 @@ class Exercise_CreateplanFragment : Fragment() {
             val data = hashMapOf(
                 "epID" to newPlanName,
                 "epDesc" to newPlandescription,
-                "epOwner" to ownerName
+                "epOwner" to ownerName,
+                "status" to "yes"
             )
 
             // Add a new document with epID, epDesc, and epOwner

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ihealthu.R
@@ -15,10 +14,6 @@ import com.example.ihealthu.databinding.FragmentExerciseMyplanBinding
 import com.example.ihealthu.exercise.Exercise_CreateplanFragment
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 class Exercise_MyplanFragment : Fragment() {
 
@@ -27,7 +22,6 @@ class Exercise_MyplanFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnneweplan: Button
-    private lateinit var deletebtn: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,10 +38,14 @@ class Exercise_MyplanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val myeplanAdapter = MyeplanAdapter(requireContext(), emptyList<Map<String, Any>>().toMutableList()) { position ->
-            // Handle delete button click
+        val myeplanAdapter = MyeplanAdapter(
+            requireContext(),
+            parentFragmentManager,
+            emptyList<Map<String, Any>>().toMutableList()
+        ) { position ->
             deleteItem(position)
         }
+
         recyclerView.adapter = myeplanAdapter
 
         btnneweplan.setOnClickListener {
@@ -57,7 +55,6 @@ class Exercise_MyplanFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
 
         val ownerName = "jian"
         fetchDataFromFirestore(ownerName) { data ->
@@ -72,27 +69,37 @@ class Exercise_MyplanFragment : Fragment() {
         Log.d(TAG, "Deleting document with epID: $epID")
 
         db.collection("exercise")
-            .document(epID)
-            .delete()
-            .addOnSuccessListener {
-                Log.d(TAG, "Document deleted successfully")
-                val fragmentManager = parentFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+            .whereEqualTo("epID", epID) // Query the document with epID field
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot.documents) {
+                    // Delete the document with the matching epID
+                    db.collection("exercise")
+                        .document(document.id)
+                        .delete()
+                        .addOnSuccessListener {
+                            Log.d(TAG, "Document deleted successfully")
+                            val fragmentManager = parentFragmentManager
+                            val fragmentTransaction = fragmentManager.beginTransaction()
+                            fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
+                            fragmentTransaction.addToBackStack(null)
+                            fragmentTransaction.commit()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e(TAG, "Delete failed: ${e.message}")
+                            Toast.makeText(requireContext(), "Delete failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
             }
             .addOnFailureListener { e ->
-                Log.e(TAG, "Delete failed: ${e.message}")
-                Toast.makeText(requireContext(), "Delete failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Query failed: ${e.message}")
+                Toast.makeText(requireContext(), "Query failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
-
 
     private fun fetchDataFromFirestore(ownerName: String, onDataFetched: (List<Map<String, Any>>) -> Unit) {
         val MyeplanList = mutableListOf<Map<String, Any>>()
         try {
-            // Create the collection name dynamically based on ownerName
             val collectionName = "exercise"
 
             db.collection(collectionName)
