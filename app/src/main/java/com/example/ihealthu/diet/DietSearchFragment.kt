@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ class DietSearchFragment : Fragment() {
     private val binding get() = _binding!!
     private val db = Firebase.firestore
     private lateinit var searchPlanView: SearchView
-    private lateinit var dsRecyclerView: RecyclerView
+    private lateinit var dsListView: ListView
     // Initialize your adapter
 
     override fun onCreateView(
@@ -28,42 +29,48 @@ class DietSearchFragment : Fragment() {
     ): View? {
         _binding = FragmentDietSearchBinding.inflate(inflater, container, false)
         searchPlanView = binding.searchPlanView
-        dsRecyclerView = binding.dsRecyclerView
-        dsRecyclerView.layoutManager = LinearLayoutManager(context)
-
+        dsListView = binding.dsListView
+        //getdata form firestore
         var searchResults = mutableListOf<Map<String, Any>>()
+        //listview item click
 
         //set up adapter
-        val adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-                val view = LayoutInflater.from(parent.context).inflate(android.R.layout.simple_list_item_1, parent, false)
-                return object : RecyclerView.ViewHolder(view) {}
-            }
+//        val adapter = object : ListView.Adapter<RecyclerView.ViewHolder>() {
+//            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+//                val view = LayoutInflater.from(parent.context).inflate(android.R.layout.simple_list_item_1, parent, false)
+//                return object : RecyclerView.ViewHolder(view) {}
+//            }
+//
+//            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+//                val textView = holder.itemView as TextView
+//                textView.text = searchResults[position]["dpOwnerName"] as? String ?: "N/A"
+//            }
+//
+//            override fun getItemCount(): Int {
+//                return searchResults.size
+//            }
+//        }
 
-            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-                val textView = holder.itemView as TextView
-                textView.text = searchResults[position]["dpOwnerName"] as? String ?: "N/A"
-            }
 
-            override fun getItemCount(): Int {
-                return searchResults.size
-            }
+        dsListView.isClickable = true
+//        dsListView.adapter = adapter
+        dsListView.setOnItemClickListener{ parent,view,position,id ->
+//            val dsOwnerName
         }
-        dsRecyclerView.adapter = adapter
 
-        // Set up search listener
-        searchPlanView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-            override fun onQueryTextChange(newText: String?): Boolean {
-                searchFirestore(newText){ results ->
-                    searchResults = results.toMutableList()
-                    adapter.notifyDataSetChanged()
-                }
-                return true
-            }
-        })
+        // Set up searchPlanView*search bar listener
+//        searchPlanView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return true
+//            }
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                searchFirestore(newText){ results ->
+//                    searchResults = results.toMutableList()
+//                    adapter.notifyDataSetChanged()
+//                }
+//                return true
+//            }
+//        })
         return binding.root
     }
 
