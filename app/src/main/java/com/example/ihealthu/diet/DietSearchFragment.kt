@@ -55,7 +55,7 @@ class DietSearchFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //cancel button
+        //back button
         dsBack.setOnClickListener {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
@@ -71,8 +71,8 @@ class DietSearchFragment : Fragment() {
             }
             override fun onQueryTextChange(newText: String?): Boolean {
                 val filteredList = searchResults.filter {
-                    it["dsOwnerEmail"]?.toString()?.contains(newText ?: "", true) == true ||
-                            it["dsPlanDesc"]?.toString()?.contains(newText ?: "", true) == true
+                    it["dpOwnerName"]?.toString()?.contains(newText ?: "", true) == true ||
+                            it["dpPlanPP"]?.toString()?.contains(newText ?: "", true) == true
                 }
                 dietSearchAdapter.dietDataList = filteredList as MutableList<Map<String, Any>>
                 dietSearchAdapter.notifyDataSetChanged()
