@@ -102,16 +102,7 @@
                         android:layout_height="wrap_content"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-                <Button
-                    android:id="@+id/btnLoginPageForgetPassword"
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:gravity="end"
-                    android:text="Forget Your Password ?"
-                    android:textColor="@color/black"
-                    android:textSize="10sp" />
+
             </LinearLayout>
             <Button
                 android:id="@+id/logInBtn"
