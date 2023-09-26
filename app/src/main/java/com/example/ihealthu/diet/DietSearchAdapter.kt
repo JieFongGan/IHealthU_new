@@ -21,9 +21,9 @@ class DietSearchAdapter(var dietDataList: MutableList<Map<String, Any>>) : Recyc
 
     override fun onBindViewHolder(holder: DietViewHolder, position: Int) {
         val data = dietDataList[position]
-        holder.dsOwnerEmail.text = data["dpOwnerEmail"] as String? ?: "N/A"
-        holder.dsPlanDays.text = data["dpPlanDays"] as String? ?: "N/A"
-        holder.dsPlanDesc.text = data["dpPlanDesc"] as String? ?: "N/A"
+        holder.dsOwnerEmail.text = data["dpOwnerName"] as String? ?: "N/A"
+        holder.dsPlanDays.text = data["dpDietDays"] as String? ?: "N/A"
+        holder.dsPlanDesc.text = data["dpPlanDPP"] as String? ?: "N/A"
     }
 
     override fun getItemCount(): Int {
