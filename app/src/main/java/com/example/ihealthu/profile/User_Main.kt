@@ -32,12 +32,12 @@ class User_Main : Fragment() {
             fragmentTransaction.commit()
         }
 
-        val button2: RelativeLayout = view.findViewById(R.id.user_weight)
+        val button2: RelativeLayout = view.findViewById(R.id.user_bmi)
 
         button2.setOnClickListener {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.framelayout_activitymain, User_Weight())
+            fragmentTransaction.replace(R.id.framelayout_activitymain, User_BMI())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
