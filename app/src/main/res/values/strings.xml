@@ -12,6 +12,7 @@
     <string name="cancelBig">CANCEL</string>
     <string name="confirm">CONFIRM</string>
     <string name="update">UPDATE</string>
+    <string name="calculate">CALCULATE</string>
     <string name="register">REGISTER</string>
     <string name="monday">Mon</string>
     <string name="tuesday">Tue</string>
@@ -39,4 +40,8 @@
     <string name="your_input_here">your input here</string>
     <string name="time">time:</string>
     <string name="title_activity_login">Login</string>
+    <string name="in_use">In use:</string>
+    <string name="active_unactive">active/unactive</string>
+    <string name="owner">owner:</string>
+    <string name="today_exercise">today exercise</string>
 </resources>

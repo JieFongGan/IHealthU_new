@@ -15,16 +15,20 @@ class MyeplanAdapter(
     private val context: Context,
     private val fragmentManager: FragmentManager,
     private val MyeplanDataList: MutableList<Map<String, Any>>,
-    private val onDeleteClickListener: (position: Int) -> Unit
+    private val onDeleteClickListener: (position: Int) -> Unit,
+    private val onStatusUpdateClickListener: (epID: String) -> Unit
 ) : RecyclerView.Adapter<MyeplanAdapter.MyViewHolder>() {
+
 
     private lateinit var epID: String
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val epIDTextView: TextView = itemView.findViewById(R.id.title_searche)
         val epDescTextView: TextView = itemView.findViewById(R.id.desc_searche)
+        val statusTextView: TextView = itemView.findViewById(R.id.status_myplan)
         val deleteeplan: Button = itemView.findViewById(R.id.btn_deleteeplan)
         val editeplan: Button = itemView.findViewById(R.id.btn_editeplan)
+        val btnNewEplan: Button = itemView.findViewById(R.id.btn_activeeplan)
     }
 
     fun getItemAtPosition(position: Int): Map<String, Any> {
@@ -41,6 +45,7 @@ class MyeplanAdapter(
 
         holder.epIDTextView.text = currentItem["epID"]?.toString() ?: "N/A"
         holder.epDescTextView.text = currentItem["epDesc"]?.toString() ?: "N/A"
+        holder.statusTextView.text = currentItem["status"]?.toString() ?: "N/A"
 
         epID = currentItem["epID"]?.toString() ?: "N/A"
         holder.deleteeplan.setOnClickListener {
@@ -59,6 +64,13 @@ class MyeplanAdapter(
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+        holder.btnNewEplan.setOnClickListener {
+            val clickedItem = getItemAtPosition(position)
+            val epID = clickedItem["epID"].toString()
+
+            onStatusUpdateClickListener(epID)
+        }
     }
 
     private fun showDeleteConfirmationDialog(position: Int, epID: String) {
@@ -69,7 +81,6 @@ class MyeplanAdapter(
             onDeleteClickListener.invoke(position)
         }
         alertDialogBuilder.setNegativeButton("No") { dialog, _ ->
-            // User clicked No, dismiss the dialog
             dialog.dismiss()
         }
 

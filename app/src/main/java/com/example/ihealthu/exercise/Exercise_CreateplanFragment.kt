@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.example.ihealthu.EmailStore
 import com.example.ihealthu.R
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.ktx.firestore
@@ -21,16 +22,17 @@ import com.google.firebase.ktx.Firebase
 class Exercise_CreateplanFragment : Fragment() {
 
     val db = Firebase.firestore
+    private lateinit var OwnerName: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_exercise__createplan, container, false)
+        OwnerName = EmailStore.globalEmail.toString()
         return view
     }
 
-    val ownerName = "jian"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,8 +70,8 @@ class Exercise_CreateplanFragment : Fragment() {
             val data = hashMapOf(
                 "epID" to newPlanName,
                 "epDesc" to newPlandescription,
-                "epOwner" to ownerName,
-                "status" to "yes"
+                "epOwner" to OwnerName,
+                "status" to "no"
             )
 
             // Add a new document with epID, epDesc, and epOwner
