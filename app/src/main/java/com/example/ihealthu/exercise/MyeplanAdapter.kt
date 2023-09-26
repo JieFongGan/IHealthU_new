@@ -19,9 +19,6 @@ class MyeplanAdapter(
     private val onStatusUpdateClickListener: (epID: String) -> Unit
 ) : RecyclerView.Adapter<MyeplanAdapter.MyViewHolder>() {
 
-
-    private lateinit var epID: String
-
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val epIDTextView: TextView = itemView.findViewById(R.id.title_searche)
         val epDescTextView: TextView = itemView.findViewById(R.id.desc_searche)
@@ -43,11 +40,13 @@ class MyeplanAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = MyeplanDataList[position]
 
-        holder.epIDTextView.text = currentItem["epID"]?.toString() ?: "N/A"
+        val epID = currentItem["epID"]?.toString() ?: "N/A"
+        val epOwner = currentItem["epOwner"]?.toString() ?: "N/A"
+
+        holder.epIDTextView.text = epID
         holder.epDescTextView.text = currentItem["epDesc"]?.toString() ?: "N/A"
         holder.statusTextView.text = currentItem["status"]?.toString() ?: "N/A"
 
-        epID = currentItem["epID"]?.toString() ?: "N/A"
         holder.deleteeplan.setOnClickListener {
             showDeleteConfirmationDialog(position, epID)
         }
@@ -57,6 +56,7 @@ class MyeplanAdapter(
 
             val bundle = Bundle()
             bundle.putString("epID", epID)
+            bundle.putString("epOwner", epOwner)
             fragment.arguments = bundle
 
             val fragmentTransaction = fragmentManager.beginTransaction()

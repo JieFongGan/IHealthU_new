@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ihealthu.EmailStore
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentExerciseMyplanBinding
 import com.example.ihealthu.databinding.FragmentExerciseSearchBinding
@@ -46,15 +47,25 @@ class Exercise_searchFragment : Fragment() {
         input_search = binding.searchEditText
         searchResultView = binding.searchResultview
 
+        // Perform the initial search when the fragment is created
+        performSearch("", searchResultView)
+
         btn_search.setOnClickListener {
             performSearch(input_search.text.toString(), searchResultView)
         }
     }
 
     private fun performSearch(query: String, searchResultView: RecyclerView) {
-        // Create a Firestore query to search for documents with matching epID
-        val firestoreQuery = db.collection("exercise")
-            .whereEqualTo("epID", query)
+        val currentUserUid = EmailStore.globalEmail.toString()
+
+        val firestoreQuery = if (query.isNotEmpty()) {
+            db.collection("exercise")
+                .whereEqualTo("epID", query)
+                .whereNotEqualTo("epOwner", currentUserUid) // Exclude user's owned plans
+        } else {
+            db.collection("exercise")
+                .whereNotEqualTo("epOwner", currentUserUid) // Retrieve all plans excluding user's owned plans
+        }
 
         firestoreQuery.get()
             .addOnSuccessListener { querySnapshot ->
@@ -74,7 +85,7 @@ class Exercise_searchFragment : Fragment() {
     }
 
     private fun updateSearchResults(searchResults: List<Map<String, Any>>, searchResultView: RecyclerView) {
-        val searchAdapter = ExerciseSearchAdapter(searchResults)
+        val searchAdapter = ExerciseSearchAdapter(searchResults, parentFragmentManager)
         searchResultView.adapter = searchAdapter
         searchResultView.layoutManager = LinearLayoutManager(requireContext())
     }

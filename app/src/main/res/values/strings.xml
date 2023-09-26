@@ -45,4 +45,5 @@
     <string name="active_unactive">active/unactive</string>
     <string name="owner">owner:</string>
     <string name="today_exercise">today exercise</string>
+    <string name="check">check</string>
 </resources>

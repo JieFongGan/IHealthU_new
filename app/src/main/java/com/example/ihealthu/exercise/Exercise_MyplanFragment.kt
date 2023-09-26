@@ -69,6 +69,7 @@ class Exercise_MyplanFragment : Fragment() {
 
         db.collection(collectionName)
             .whereEqualTo("epID", epID)
+            .whereEqualTo("epOwner", OwnerName)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
@@ -110,11 +111,11 @@ class Exercise_MyplanFragment : Fragment() {
         Log.d(TAG, "Deleting document with epID: $epID")
 
         db.collection("exercise")
-            .whereEqualTo("epID", epID) // Query the document with epID field
+            .whereEqualTo("epID", epID)
+            .whereEqualTo("epOwner", OwnerName)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents) {
-                    // Delete the document with the matching epID
                     db.collection("exercise")
                         .document(document.id)
                         .delete()

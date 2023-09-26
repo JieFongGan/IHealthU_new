@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import com.example.ihealthu.EmailStore
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentExerciseMpeditBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -17,7 +18,7 @@ import com.google.firebase.ktx.Firebase
 
 class Exercise_MpeditFragment : Fragment() {
 
-    private val db = Firebase.firestore
+    val db = Firebase.firestore
     private val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
     private var _binding: FragmentExerciseMpeditBinding? = null
     private val binding get() = _binding!!
@@ -25,6 +26,7 @@ class Exercise_MpeditFragment : Fragment() {
     private var epID: String? = null
     private lateinit var exerciseInput: List<EditText>
     private lateinit var timeInput: List<EditText>
+    private lateinit var OwnerName: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +35,7 @@ class Exercise_MpeditFragment : Fragment() {
         _binding = FragmentExerciseMpeditBinding.inflate(inflater, container, false)
         btncancel = binding.btnCancel
         epID = arguments?.getString("epID")
+        OwnerName = EmailStore.globalEmail.toString()
         return binding.root
     }
 
@@ -62,6 +65,7 @@ class Exercise_MpeditFragment : Fragment() {
         epID?.let { nonNullEpID ->
             db.collection("exercise")
                 .whereEqualTo("epID", nonNullEpID)
+                .whereEqualTo("epOwner", OwnerName)
                 .get()
                 .addOnSuccessListener { querySnapshot ->
                     for (document in querySnapshot.documents) {
@@ -97,6 +101,7 @@ class Exercise_MpeditFragment : Fragment() {
             Log.d("MyePlanFragment", "Retrieving data for day: $day")
             db.collection("exercise")
                 .whereEqualTo("epID", epID)
+                .whereEqualTo("epOwner", OwnerName)
                 .get()
                 .addOnSuccessListener { querySnapshot ->
                     if (!querySnapshot.isEmpty) {
@@ -148,6 +153,7 @@ class Exercise_MpeditFragment : Fragment() {
             // Query for documents where the epID field matches your target epID
             db.collection("exercise")
                 .whereEqualTo("epID", epID)
+                .whereEqualTo("epOwner", OwnerName)
                 .get()
                 .addOnSuccessListener { querySnapshot ->
                     for (document in querySnapshot.documents) {

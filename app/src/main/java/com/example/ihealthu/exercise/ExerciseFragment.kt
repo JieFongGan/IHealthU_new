@@ -31,7 +31,6 @@ class ExerciseFragment : Fragment() {
     private lateinit var dailyRecyclerView: RecyclerView
     private lateinit var btntomyeplan: Button
     private lateinit var btntosearcheplan: Button
-    private lateinit var daytabLayout: TabLayout
     private var selectedDay: String = "Mon"
     private lateinit var exerciseAdapter: ExercisePlanAdapter
     private lateinit var OwnerName: String
