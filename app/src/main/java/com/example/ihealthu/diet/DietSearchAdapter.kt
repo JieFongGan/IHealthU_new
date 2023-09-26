@@ -23,7 +23,7 @@ class DietSearchAdapter(var dietDataList: MutableList<Map<String, Any>>) : Recyc
         val data = dietDataList[position]
         holder.dsOwnerEmail.text = data["dpOwnerName"] as String? ?: "N/A"
         holder.dsPlanDays.text = data["dpDietDays"] as String? ?: "N/A"
-        holder.dsPlanDesc.text = data["dpPlanDPP"] as String? ?: "N/A"
+        holder.dsPlanDesc.text = data["dpPlanPP"] as String? ?: "N/A"
     }
 
     override fun getItemCount(): Int {

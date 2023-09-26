@@ -15,6 +15,7 @@ import com.example.ihealthu.R
 import androidx.appcompat.widget.SearchView
 import com.example.ihealthu.databinding.FragmentDietSearchBinding
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.firestore.QuerySnapshot
 
 class DietSearchFragment : Fragment() {
@@ -24,6 +25,8 @@ class DietSearchFragment : Fragment() {
     private lateinit var searchPlanView: SearchView
     private lateinit var dsRecyclerView: RecyclerView
     private lateinit var dsBack: Button
+    private var searchResults = mutableListOf<Map<String, Any>>()
+    private lateinit var dietSearchAdapter: DietSearchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,25 +36,49 @@ class DietSearchFragment : Fragment() {
         searchPlanView = binding.searchPlanView
         dsRecyclerView = binding.dsRecyclerView
         dsBack = binding.dsBack
-
         //adapter init
-        val dietSearchAdapter = DietSearchAdapter(mutableListOf())
+        dietSearchAdapter = DietSearchAdapter(mutableListOf())
         dsRecyclerView.layoutManager = LinearLayoutManager(context)
         dsRecyclerView.adapter = dietSearchAdapter
         //getdata form firestore
-        var searchResults = mutableListOf<Map<String, Any>>()
-        // Fetch data from Firestore
         db.collection("diet")
             .addSnapshotListener { querySnapshot: QuerySnapshot?, _ ->
                 if (querySnapshot != null) {
-                    val searchResults = querySnapshot.documents.map { it.data }
+                    searchResults = querySnapshot.documents.map { it.data } as MutableList<Map<String, Any>>
                     dietSearchAdapter.dietDataList.clear()
-                    dietSearchAdapter.dietDataList.addAll(searchResults as MutableList<Map<String, Any>>)
+                    dietSearchAdapter.dietDataList.addAll(searchResults)
                     dietSearchAdapter.notifyDataSetChanged()
                 }
             }
-
+        setupSearchView()
         return binding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //cancel button
+        dsBack.setOnClickListener {
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, DietPlanFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+    }
+    private fun setupSearchView() {
+        searchPlanView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val filteredList = searchResults.filter {
+                    it["dsOwnerEmail"]?.toString()?.contains(newText ?: "", true) == true ||
+                            it["dsPlanDesc"]?.toString()?.contains(newText ?: "", true) == true
+                }
+                dietSearchAdapter.dietDataList = filteredList as MutableList<Map<String, Any>>
+                dietSearchAdapter.notifyDataSetChanged()
+                return false
+            }
+        })
     }
 
 }

@@ -29,11 +29,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="#CBFF6464" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <TextView
                 android:id="@+id/dsPlanDays"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="XDays Plan"/>
+                android:text="Mon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="day's Plan"/>
+        </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
