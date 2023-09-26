@@ -42,19 +42,10 @@ class User_Main : Fragment() {
             fragmentTransaction.commit()
         }
 
-        val button3: RelativeLayout = view.findViewById(R.id.user_review_comment)
+
+        val button3: RelativeLayout = view.findViewById(R.id.user_logOut)
 
         button3.setOnClickListener {
-            val fragmentManager = parentFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.framelayout_activitymain, User_Review_Comment())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        }
-
-        val button4: RelativeLayout = view.findViewById(R.id.user_logOut)
-
-        button4.setOnClickListener {
             // Create and configure the AlertDialog
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Sign Out")
