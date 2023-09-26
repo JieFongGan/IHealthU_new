@@ -85,7 +85,6 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <!-- Button -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dailyeg_View"
                 android:layout_width="match_parent"

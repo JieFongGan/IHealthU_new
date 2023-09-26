@@ -42,4 +42,5 @@
     <string name="in_use">In use:</string>
     <string name="active_unactive">active/unactive</string>
     <string name="owner">owner:</string>
+    <string name="today_exercise">today exercise</string>
 </resources>

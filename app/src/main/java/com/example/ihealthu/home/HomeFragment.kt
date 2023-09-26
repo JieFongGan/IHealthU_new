@@ -1,60 +1,111 @@
 package com.example.ihealthu.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.ihealthu.R
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ihealthu.EmailStore
+import com.example.ihealthu.databinding.FragmentHomeBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import java.util.Calendar
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    val db = Firebase.firestore
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var HomeExerciseView: RecyclerView
+    private lateinit var OwnerName: String
+    private lateinit var homeAdapter: HomeAdapter
+    private var selectedDay: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        OwnerName = EmailStore.globalEmail.toString()
+
+        val calendar = Calendar.getInstance()
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+
+        selectedDay = when (dayOfWeek) {
+            Calendar.SUNDAY -> "Sun"
+            Calendar.MONDAY -> "Mon"
+            Calendar.TUESDAY -> "Tue"
+            Calendar.WEDNESDAY -> "Wed"
+            Calendar.THURSDAY -> "Thu"
+            Calendar.FRIDAY -> "Fri"
+            Calendar.SATURDAY -> "Sat"
+            else -> ""
+        }
+
+        HomeExerciseView = binding.homeegView
+        val layoutManager = LinearLayoutManager(requireContext())
+        HomeExerciseView.layoutManager = layoutManager
+
+        homeAdapter = HomeAdapter(emptyList<Map<String, Any>>().toMutableList(), selectedDay)
+        HomeExerciseView.adapter = homeAdapter
+
+        loadDataForDay(selectedDay, OwnerName)
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun loadDataForDay(day: String, ownerName: String) {
+        lifecycleScope.launch {
+            val data = fetchDataFromFirestore(day, ownerName)
+            homeAdapter.submitList(data)
+        }
+    }
+
+    private suspend fun fetchDataFromFirestore(day: String, ownerName: String): List<Map<String, Any>> {
+        return withContext(Dispatchers.IO) {
+            val exerciseDataList = mutableListOf<Map<String, Any>>()
+            try {
+                val querySnapshot = db.collection("exercise")
+                    .whereEqualTo("epOwner", ownerName)
+                    .whereEqualTo("status", "Yes")
+                    .get()
+                    .await()
+
+                for (document in querySnapshot.documents) {
+                    val data = document.data
+
+                    val subdocument = document.reference
+                        .collection("DaysOfWeek")
+                        .document(day)
+                        .get()
+                        .await()
+
+                    val subdocumentData = subdocument.data
+                    if (subdocumentData != null) {
+                        data?.putAll(subdocumentData)
+                    }
+
+                    if (data != null) {
+                        exerciseDataList.add(data)
+                    }
                 }
+            } catch (e: Exception) {
+                Log.e("HomeFragment", "Error fetching data: ${e.message}")
             }
+
+            if (exerciseDataList.isEmpty()) {
+                exerciseDataList.add(mapOf("no_plans" to true))
+            }
+
+            return@withContext exerciseDataList
+        }
     }
 }

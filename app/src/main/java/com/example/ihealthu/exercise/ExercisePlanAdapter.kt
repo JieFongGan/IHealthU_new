@@ -1,14 +1,11 @@
 package com.example.ihealthu.exercise
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ihealthu.R
-import com.example.ihealthu.diet.DietPlanAdapter
 
 class ExercisePlanAdapter(
     private val exerciseplanlist: MutableList<Map<String, Any>>,
@@ -29,8 +26,8 @@ class ExercisePlanAdapter(
         val currentItem = exerciseplanlist[position]
 
         // Assuming each item in the list corresponds to a day's document
-        val epContent = currentItem["epContent"]?.toString() ?: "N/A"
-        val epTime = currentItem["eptTime"]?.toString() ?: "N/A"
+        val epContent = currentItem["epContent"]?.toString() ?: "relax and chill"
+        val epTime = currentItem["eptTime"]?.toString() ?: "No exercise today"
 
         holder.goalhour.text = epTime
         holder.goalexercise.text = epContent
