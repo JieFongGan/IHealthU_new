@@ -6,8 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import com.example.ihealthu.EmailStore
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentUserBmiBinding
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Date
 
 
 class User_BMI : Fragment() {
@@ -40,6 +45,37 @@ class User_BMI : Fragment() {
 
         binding.btnCalculate.setOnClickListener {
             calculateBMI()
+        }
+
+        binding.btnRecord.setOnClickListener {
+            val timestamp = Timestamp(Date())
+
+            val emailToSearch = EmailStore.globalEmail
+            if(emailToSearch != null) {
+
+                val height = binding.heightPicker.value
+                val doubleHeight = height.toDouble() / 100
+
+                val weight = binding.weightPicker.value
+
+                val bmi = weight.toDouble() / (doubleHeight * doubleHeight)
+
+                val bmiData = hashMapOf(
+                    "email" to emailToSearch,  // Replace with the user's email
+                    "bmi" to bmi,
+                    "timestamp" to timestamp
+                )
+                val db = FirebaseFirestore.getInstance()
+                db.collection("bmi")
+                    .add(bmiData)
+                    .addOnSuccessListener { documentReference ->
+                        Toast.makeText(requireContext(), "BMI successful recorded", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(requireContext(), "BMI fail to record", Toast.LENGTH_SHORT).show()
+                    }
+            }
+
         }
 
         binding.btnBack.setOnClickListener {
