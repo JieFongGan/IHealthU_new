@@ -37,7 +37,7 @@ class DietSearchFragment : Fragment() {
         dsRecyclerView = binding.dsRecyclerView
         dsBack = binding.dsBack
         //adapter init
-        dietSearchAdapter = DietSearchAdapter(mutableListOf())
+        dietSearchAdapter = DietSearchAdapter(mutableListOf(), parentFragmentManager)
         dsRecyclerView.layoutManager = LinearLayoutManager(context)
         dsRecyclerView.adapter = dietSearchAdapter
         //getdata form firestore

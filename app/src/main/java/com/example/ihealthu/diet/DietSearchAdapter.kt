@@ -1,13 +1,19 @@
 package com.example.ihealthu.diet
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.navigation.findNavController
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ihealthu.R
 
-class DietSearchAdapter(var dietDataList: MutableList<Map<String, Any>>) : RecyclerView.Adapter<DietSearchAdapter.DietViewHolder>() {
+class DietSearchAdapter(var dietDataList: MutableList<Map<String, Any>>,
+                        private val fragmentManager: FragmentManager) : RecyclerView.Adapter<DietSearchAdapter.DietViewHolder>() {
     class DietViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dsOwnerEmail: TextView = itemView.findViewById(R.id.dsOwnerEmail)
         val dsPlanDays: TextView = itemView.findViewById(R.id.dsPlanDays)
@@ -24,7 +30,26 @@ class DietSearchAdapter(var dietDataList: MutableList<Map<String, Any>>) : Recyc
         holder.dsOwnerEmail.text = data["dpOwnerName"] as String? ?: "N/A"
         holder.dsPlanDays.text = data["dpDietDays"] as String? ?: "N/A"
         holder.dsPlanDesc.text = data["dpPlanPP"] as String? ?: "N/A"
+        //item onclick *the card view
+        holder.itemView.setOnClickListener {
+            val selectedOwnerEmail = data["dpOwnerName"] as String? ?: "N/A"
+            val selectedPlanDays = data["dpPlanDays"] as String? ?: "N/A"
+
+            val detailFragment = DietSearchDetailFragment()
+            //cokkie
+            val bundle= Bundle()
+            bundle.putString("ownerEmail", selectedOwnerEmail)
+            bundle.putString("planDays", selectedPlanDays)
+            detailFragment.arguments = bundle
+
+            val transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.framelayout_activitymain, detailFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
+
+
 
     override fun getItemCount(): Int {
         return dietDataList.size
