@@ -28,8 +28,22 @@ class DietSearchDetailFragment : Fragment() {
     ): View? {
         _binding = FragmentDietSearchDetailBinding.inflate(inflater, container, false)
         etOwnerName = EmailStore.globalEmail.toString()
+        //slected OwnerName
         val ownerEmail = arguments?.getString("ownerEmail").toString()
         val planDays = arguments?.getString("planDays").toString()
+        Log.d("Debug", "confirm value get in detail $ownerEmail , $planDays")
+
+        val dsdTheday = binding.dsdTheday
+        val ppPDesc = binding.ppPDesc
+        val bfTime = binding.bfTime
+        val bfEsKl = binding.bfEsKl
+        val bfRemark = binding.bfRemark
+        val luTime = binding.luTime
+        val luEsKl = binding.luEsKl
+        val luRemark = binding.luRemark
+        val dnTime = binding.dnTime
+        val dnEsKl = binding.dnEsKl
+        val dnRemark = binding.dnRemark
 
         fetchDataAndPopulateViews(ownerEmail, planDays)
 
