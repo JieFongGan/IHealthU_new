@@ -33,7 +33,7 @@ class DietSearchAdapter(var dietDataList: MutableList<Map<String, Any>>,
         //item onclick *the card view
         holder.itemView.setOnClickListener {
             val selectedOwnerEmail = data["dpOwnerName"] as String? ?: "N/A"
-            val selectedPlanDays = data["dpPlanDays"] as String? ?: "N/A"
+            val selectedPlanDays = data["dpDietDays"] as String? ?: "N/A"
 
             val detailFragment = DietSearchDetailFragment()
             //cokkie
