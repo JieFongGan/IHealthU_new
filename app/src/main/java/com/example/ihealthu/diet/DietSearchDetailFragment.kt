@@ -128,14 +128,24 @@ class DietSearchDetailFragment : Fragment() {
                     .whereEqualTo("dpDietDays", planDays)
                     .get()
                     .addOnSuccessListener { documents ->
-                        for (document in documents) {
-                            db.collection("diet").document(document.id).update(dataToUpdate)
+                        if(documents.isEmpty){
+                            db.collection("diet").add(dataToUpdate)
                                 .addOnSuccessListener {
-                                    Log.d(ContentValues.TAG, "DocumentSnapshot successfully updated!")
+                                    Log.d(ContentValues.TAG, "successfully created")
                                 }
                                 .addOnFailureListener { e ->
-                                    Log.w(ContentValues.TAG, "Error updating document", e)
+                                    Log.w(ContentValues.TAG, "Error creating document", e)
                                 }
+                        }else{
+                            for (document in documents) {
+                                db.collection("diet").document(document.id).update(dataToUpdate)
+                                    .addOnSuccessListener {
+                                        Log.d(ContentValues.TAG, "DocumentSnapshot successfully updated!")
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.w(ContentValues.TAG, "Error updating document", e)
+                                }
+                            }
                         }
                     }
                     .addOnFailureListener { exception ->
