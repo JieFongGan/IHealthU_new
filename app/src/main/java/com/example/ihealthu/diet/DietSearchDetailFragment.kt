@@ -27,6 +27,7 @@ class DietSearchDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDietSearchDetailBinding.inflate(inflater, container, false)
+        //login user name
         etOwnerName = EmailStore.globalEmail.toString()
         //slected OwnerName
         val ownerEmail = arguments?.getString("ownerEmail").toString()
@@ -84,13 +85,13 @@ class DietSearchDetailFragment : Fragment() {
                     binding.dsdTheday.text = document.getString("dpDietDays")
                     binding.ppPDesc.text = document.getString("dpPlanPP")
                     binding.bfTime.text = document.getString("dpBftime")
-                    binding.bfEsKl.text = document.getString("dpBfesKl")
+                    binding.bfEsKl.text = document.getString("dpBfkals")
                     binding.bfRemark.text = document.getString("dpBfRemark")
                     binding.luTime.text = document.getString("dpLutime")
-                    binding.luEsKl.text = document.getString("dpLuesKl")
+                    binding.luEsKl.text = document.getString("dpLukals")
                     binding.luRemark.text = document.getString("dpLuRemark")
                     binding.dnTime.text = document.getString("dpDntime")
-                    binding.dnEsKl.text = document.getString("dpDnesKl")
+                    binding.dnEsKl.text = document.getString("dpDnkals")
                     binding.dnRemark.text = document.getString("dpDnRemark")
                 }
             }
@@ -108,6 +109,7 @@ class DietSearchDetailFragment : Fragment() {
                 val dataToUpdate = hashMapOf<String, Any?>()
                 for (document in documents) {
                     // Fetch data and populate the HashMap
+                    dataToUpdate["dpOwnerName"] = etOwnerName
                     dataToUpdate["dpDietDays"] = document.getString("dpDietDays")
                     dataToUpdate["dpPlanPP"] = document.getString("dpPlanPP")
                     dataToUpdate["dpBftime"] = document.getString("dpBftime")
@@ -123,7 +125,7 @@ class DietSearchDetailFragment : Fragment() {
                 // Now update the Firestore document for the user with etOwnerName
                 db.collection("diet")
                     .whereEqualTo("dpOwnerName", etOwnerName)
-                    .whereEqualTo("dpPlanDays", planDays)
+                    .whereEqualTo("dpDietDays", planDays)
                     .get()
                     .addOnSuccessListener { documents ->
                         for (document in documents) {
