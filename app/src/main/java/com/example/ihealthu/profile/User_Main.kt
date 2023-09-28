@@ -37,7 +37,7 @@ class User_Main : Fragment() {
         button2.setOnClickListener {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.framelayout_activitymain, User_BMI())
+            fragmentTransaction.replace(R.id.framelayout_activitymain, User_BMI_Main())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

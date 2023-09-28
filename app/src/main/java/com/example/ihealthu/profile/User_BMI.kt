@@ -59,11 +59,13 @@ class User_BMI : Fragment() {
                 val weight = binding.weightPicker.value
 
                 val bmi = weight.toDouble() / (doubleHeight * doubleHeight)
+                val healthyMessage = healthyMessage(bmi)
 
                 val bmiData = hashMapOf(
                     "email" to emailToSearch,  // Replace with the user's email
                     "bmi" to bmi,
-                    "timestamp" to timestamp
+                    "timestamp" to timestamp,
+                    "healthyMessage" to healthyMessage
                 )
                 val db = FirebaseFirestore.getInstance()
                 db.collection("bmi")
@@ -81,7 +83,7 @@ class User_BMI : Fragment() {
         binding.btnBack.setOnClickListener {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.framelayout_activitymain, User_Main())
+            fragmentTransaction.replace(R.id.framelayout_activitymain, User_BMI_Main())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
