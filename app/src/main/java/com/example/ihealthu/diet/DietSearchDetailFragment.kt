@@ -103,7 +103,7 @@ class DietSearchDetailFragment : Fragment() {
         // Fetch data from Firestore based on ownerEmail and planDays
         db.collection("diet")
             .whereEqualTo("dpOwnerName", ownerEmail)
-            .whereEqualTo("dpPlanDays", planDays)
+            .whereEqualTo("dpDietDays", planDays)
             .get()
             .addOnSuccessListener { documents ->
                 val dataToUpdate = hashMapOf<String, Any?>()
