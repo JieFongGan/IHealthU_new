@@ -80,17 +80,18 @@ class DietSearchDetailFragment : Fragment() {
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
+                    binding.dsdOwnerName.text = document.getString("dpOwnerName")
                     binding.dsdTheday.text = document.getString("dpDietDays")
                     binding.ppPDesc.text = document.getString("dpPlanPP")
-                    binding.bfTime.text = document.getString("bfTime")
-                    binding.bfEsKl.text = document.getString("bfEsKl")
-                    binding.bfRemark.text = document.getString("bfRemark")
-                    binding.luTime.text = document.getString("luTime")
-                    binding.luEsKl.text = document.getString("luEsKl")
-                    binding.luRemark.text = document.getString("luRemark")
-                    binding.dnTime.text = document.getString("dnTime")
-                    binding.dnEsKl.text = document.getString("dnEsKl")
-                    binding.dnRemark.text = document.getString("dnRemark")
+                    binding.bfTime.text = document.getString("dpBfTime")
+                    binding.bfEsKl.text = document.getString("dpBfEsKl")
+                    binding.bfRemark.text = document.getString("dpBfRemark")
+                    binding.luTime.text = document.getString("dpLuTime")
+                    binding.luEsKl.text = document.getString("dpLuEsKl")
+                    binding.luRemark.text = document.getString("dpLuRemark")
+                    binding.dnTime.text = document.getString("dpDnTime")
+                    binding.dnEsKl.text = document.getString("dpDnEsKl")
+                    binding.dnRemark.text = document.getString("dpDnRemark")
                 }
             }
             .addOnFailureListener { exception ->
