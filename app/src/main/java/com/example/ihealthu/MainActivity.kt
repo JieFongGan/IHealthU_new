@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.ihealthu.databinding.ActivityMainBinding
-import com.example.ihealthu.diet.DietFragment
 import com.example.ihealthu.diet.DietPlanFragment
 import com.example.ihealthu.exercise.ExerciseFragment
 import com.example.ihealthu.home.HomeFragment
