@@ -62,7 +62,7 @@ class DietSearchDetailFragment : Fragment() {
         // For example:
         db.collection("diet")
             .whereEqualTo("dpOwnerName", ownerEmail)
-            .whereEqualTo("dpPlanDays", planDays)
+            .whereEqualTo("dpDietDays", planDays)
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
