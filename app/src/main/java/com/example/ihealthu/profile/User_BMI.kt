@@ -10,9 +10,10 @@ import android.widget.Toast
 import com.example.ihealthu.EmailStore
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentUserBmiBinding
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.Date
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class User_BMI : Fragment() {
@@ -48,7 +49,6 @@ class User_BMI : Fragment() {
         }
 
         binding.btnRecord.setOnClickListener {
-            val timestamp = Timestamp(Date())
 
             val emailToSearch = EmailStore.globalEmail
             if(emailToSearch != null) {
@@ -61,10 +61,14 @@ class User_BMI : Fragment() {
                 val bmi = weight.toDouble() / (doubleHeight * doubleHeight)
                 val healthyMessage = healthyMessage(bmi)
 
+                val currentTime = Calendar.getInstance().time
+                val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
+                val formattedTimestamp = dateFormat.format(currentTime)
+
                 val bmiData = hashMapOf(
                     "email" to emailToSearch,  // Replace with the user's email
-                    "bmi" to bmi,
-                    "timestamp" to timestamp,
+                    "bmi" to String.format("%.2f", bmi),
+                    "timestamp" to formattedTimestamp,
                     "healthyMessage" to healthyMessage
                 )
                 val db = FirebaseFirestore.getInstance()

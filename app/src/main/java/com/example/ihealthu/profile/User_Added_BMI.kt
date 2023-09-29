@@ -6,12 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ihealthu.EmailStore
 import com.example.ihealthu.R
-import com.example.ihealthu.databinding.FragmentExerciseMyplanBinding
 import com.example.ihealthu.databinding.FragmentUserAddedBMIBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -52,7 +51,7 @@ class User_Added_BMI : Fragment() {
         }
 
 
-        val button1: RelativeLayout = view.findViewById(R.id.btnBack)
+        val button1: Button = view.findViewById(R.id.btnBack)
 
         button1.setOnClickListener {
             val fragmentManager = parentFragmentManager
