@@ -55,7 +55,8 @@ class Register : AppCompatActivity() {
                             "email" to email,
                             "dateOfBirth" to dateOfBirth,
                             "gender" to gender,
-                            "password" to pass
+                            "password" to pass,
+                            "profilepic" to ""
                         )
                         db.collection("user")
                             .add(data)

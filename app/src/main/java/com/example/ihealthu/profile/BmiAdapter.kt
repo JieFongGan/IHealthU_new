@@ -28,9 +28,9 @@ class BmiAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val record = bmiRecords[position]
 
-        holder.timestampTextView.text = record["timestamp"]?.toString() ?: "N/A"
-        holder.bmiTextView.text = record["bmi"]?.toString() ?: "N/A"
-        holder.healthyMessageTextView.text = record["healthyMessage"]?.toString() ?: "N/A"
+        holder.timestampTextView.text = record["timestamp"]?.toString() ?: "No record"
+        holder.bmiTextView.text = record["bmi"]?.toString() ?: "No record"
+        holder.healthyMessageTextView.text = record["healthyMessage"]?.toString() ?: "No record"
 
     }
 

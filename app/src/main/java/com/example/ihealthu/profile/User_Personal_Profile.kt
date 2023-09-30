@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.ihealthu.EmailStore
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentUserPersonalProfileBinding
@@ -47,6 +48,7 @@ class User_Personal_Profile : Fragment() {
                         val userEmail = document.getString("email")
                         val userGender = document.getString("gender")
                         val userDateOfBirth = document.getString("dateOfBirth")
+                        val profilePicUrl = document["profilepic"] as? String
 
                         // Update TextViews with user data
                         val fullNameTextView: TextView = view.findViewById(R.id.databaseFullName)
@@ -58,6 +60,11 @@ class User_Personal_Profile : Fragment() {
                         emailTextView.text = userEmail
                         genderTextView.text = userGender
                         dateOfBirthTextView.text = userDateOfBirth
+                        // Load and display profile picture if available
+                        if (!profilePicUrl.isNullOrEmpty()) {
+                            loadProfilePicture(profilePicUrl)
+                        }
+
                     } else {
                         Toast.makeText(requireContext(), "No user found", Toast.LENGTH_SHORT).show()
                     }
@@ -84,6 +91,12 @@ class User_Personal_Profile : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+    }
+
+    private fun loadProfilePicture(profilePicUrl: String) {
+        Glide.with(requireContext())
+            .load(profilePicUrl)
+            .into(binding.userProfileIcon)
     }
 
 }
