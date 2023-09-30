@@ -39,7 +39,7 @@
                         android:layout_marginEnd="@dimen/single_btn_only"
                         android:layout_marginBottom="@dimen/activity_vertical_margin"
                         android:layout_weight="1"
-                        android:backgroundTint="@android:color/holo_orange_dark"
+                        android:backgroundTint="@color/blue"
                         android:text="@string/create_new_plan"
                         android:textColor="@color/white"
                         android:textSize="20sp" />

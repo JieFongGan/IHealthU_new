@@ -1,4 +1,4 @@
-package com.example.ihealthu.profile
+package com.example.ihealthu
 
 import androidx.lifecycle.ViewModel
 

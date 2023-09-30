@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:backgroundTint="@android:color/holo_red_dark"
+                android:backgroundTint="@color/pinkColor"
                 android:text="@string/delete" />
 
             <Button
@@ -73,7 +73,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:backgroundTint="@android:color/holo_orange_dark"
+                android:backgroundTint="@color/lightred"
                 android:text="@string/edit" />
 
             <Button
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:backgroundTint="@android:color/holo_green_dark"
+                android:backgroundTint="@color/green"
                 android:text="@string/active_unactive" />
         </LinearLayout>
     </LinearLayout>

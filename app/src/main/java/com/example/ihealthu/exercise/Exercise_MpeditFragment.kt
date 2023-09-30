@@ -1,6 +1,5 @@
 package com.example.ihealthu.exercise
 
-import Exercise_MyplanFragment
 import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
@@ -88,6 +87,13 @@ class Exercise_MpeditFragment : Fragment() {
                 }
         }
 
+        btncancel.setOnClickListener {
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, Exercise_MyplanFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
         val btnUpdate = binding.btnEditeplan
         btnUpdate.setOnClickListener {
