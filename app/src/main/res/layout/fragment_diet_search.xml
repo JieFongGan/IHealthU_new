@@ -23,12 +23,14 @@
             android:id="@+id/dsBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#673AB7"
             android:text="Back"
             />
         <Button
             android:id="@+id/dsSearchWeb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#CBFF6464"
             android:text="Search On Web"
             />
     </LinearLayout>
