@@ -12,4 +12,5 @@
     <color name="lightred">#CBFF6464</color>
     <color name="lightpink">#CBFFBDBD</color>
     <color name="transparentColor">#00FFFFFF</color>
+    <color name="blue">#0077B5</color>
 </resources>

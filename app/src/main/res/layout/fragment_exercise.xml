@@ -34,7 +34,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@android:color/holo_orange_dark"
+                        android:backgroundTint="@color/lightred"
                         android:text="@string/monday" />
 
                     <Button
@@ -43,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@android:color/holo_orange_dark"
+                        android:backgroundTint="@color/blue"
                         android:text="@string/tuesday" />
 
                     <Button
@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@android:color/holo_orange_dark"
+                        android:backgroundTint="@color/lightred"
                         android:text="@string/wednesday" />
 
                     <Button
@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@android:color/holo_orange_dark"
+                        android:backgroundTint="@color/blue"
                         android:text="@string/thursday" />
 
                     <Button
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@android:color/holo_orange_dark"
+                        android:backgroundTint="@color/lightred"
                         android:text="@string/friday" />
 
                     <Button
@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@android:color/holo_orange_dark"
+                        android:backgroundTint="@color/blue"
                         android:text="@string/saturday" />
 
                     <Button
@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@android:color/holo_orange_dark"
+                        android:backgroundTint="@color/lightred"
                         android:text="@string/sunday" />
                 </LinearLayout>
             </HorizontalScrollView>
@@ -105,7 +105,6 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-
                 <Button
                     android:id="@+id/btn_searcheplan"
                     android:layout_width="match_parent"
@@ -119,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:backgroundTint="@color/lightred"
+                    android:backgroundTint="@color/blue"
                     android:text="@string/my_plan" />
             </LinearLayout>
         </LinearLayout>
