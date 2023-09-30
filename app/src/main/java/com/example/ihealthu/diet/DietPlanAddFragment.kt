@@ -206,4 +206,8 @@ class DietPlanAddFragment : Fragment() {
                 fragmentTransaction.commit()
             }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

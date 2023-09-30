@@ -40,5 +40,8 @@ private fun webViewSetup(search:String){
         settings.javaScriptEnabled = true
     }
 }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

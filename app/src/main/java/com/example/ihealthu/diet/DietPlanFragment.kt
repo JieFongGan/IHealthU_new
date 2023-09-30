@@ -25,7 +25,9 @@ import java.io.Serializable
 import kotlinx.coroutines.*
 import android.app.AlertDialog
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.example.ihealthu.EmailStore
+import com.example.ihealthu.diet.DietPlanViewModel
 
 class DietPlanFragment : Fragment() {
 
@@ -51,6 +53,8 @@ class DietPlanFragment : Fragment() {
     private var documentId: String?=null
 
     val db = Firebase.firestore
+
+    private val viewModel: DietPlanViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,8 +86,17 @@ class DietPlanFragment : Fragment() {
         dogRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         dogRecyclerView.adapter = DietPlanAdapter(emptyList<Map<String, Any>>().toMutableList())
         dogRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        // Observe changes in data and update UI
+        viewModel.dietData.observe(viewLifecycleOwner) { data ->
+            (dogRecyclerView.adapter as DietPlanAdapter).submitList(data)
+        }
+        // Observe changes in selected day
+        viewModel.daySelected.observe(viewLifecycleOwner) { day ->
+            theday = day
+        }
+
         // Fetch data for Monday by default
-        loadDataForDay("Mon",etOwnerName)
+        viewModel.fetchDataFromFirestore("Mon", etOwnerName)
         // Set click listeners for each day button
         binding.dogMon.setOnClickListener { loadDataForDay("Mon",etOwnerName) }
         binding.dogTue.setOnClickListener { loadDataForDay("Tue",etOwnerName) }
@@ -97,21 +110,28 @@ class DietPlanFragment : Fragment() {
         dogEdit.setOnClickListener {
             try {
                 // Fetch data for the day
-                lifecycleScope.launch {
-                    val dataForTheDay: List<Map<String, Any>> =
-                        fetchDataFromFirestore(theday, etOwnerName)
+                viewModel.dietData.observe(viewLifecycleOwner) { dataForTheDay ->
                     val documentIdp = documentId
                     Log.d("Firestore", "Document ID set to inedit button: $documentIdp")
-                    setFragmentResult("dietPlanData", bundleOf("dayData" to dataForTheDay as Serializable))
+                    setFragmentResult(
+                        "dietPlanData",
+                        bundleOf("dayData" to dataForTheDay as Serializable)
+                    )
                     setFragmentResult("documentId", bundleOf("docID" to documentIdp))
-//                    bundle.putSerializable("dayData",dataForTheDay as Serializable)
-//                    bundle.putString("documentId", documentIdp)
-                }//navi to PlanAdd
-                val fragmentManager = parentFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.framelayout_activitymain, DietPlanAddFragment())
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+
+                    // navi to PlanAdd
+                    val fragmentManager = parentFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(
+                        R.id.framelayout_activitymain,
+                        DietPlanAddFragment()
+                    )
+                    fragmentTransaction.addToBackStack(null)
+                    fragmentTransaction.commit()
+
+                    // Remove observer to prevent repeated calls
+                    viewModel.dietData.removeObservers(viewLifecycleOwner)
+                }
             } catch (e: Exception) {
                 Log.e("FragmentTransaction", "Error: ${e.message}")
             }
@@ -157,41 +177,14 @@ class DietPlanFragment : Fragment() {
     //weekly button fetch data
     private fun loadDataForDay(day: String, ownerName: String) {
         lifecycleScope.launch {
-            val data = fetchDataFromFirestore(day,ownerName)
+            viewModel.fetchDataFromFirestore(day, ownerName)
             //chg the value
             theday = day
             setFragmentResult("selectedDay", bundleOf("day" to day))
             //submitList
-            (dogRecyclerView.adapter as DietPlanAdapter).submitList(data)
         }
     }
-    private suspend fun fetchDataFromFirestore(day: String, ownerName: String): List<Map<String, Any>> {
-        return withContext(Dispatchers.IO) {
-            val dietDataList = mutableListOf<Map<String, Any>>()
-            try {
-                val querySnapshot = db.collection("diet")
-                    .whereEqualTo("dpDietDays", day)
-                    .whereEqualTo("dpOwnerName", ownerName)
-                    .get()
-                    .addOnSuccessListener { querySnapshot ->
-                        for (document in querySnapshot) {
-                            documentId = document.id
-                            Log.d("Firestore", "Document ID set to: $documentId")
-                            for (document in querySnapshot.documents) {
-                                Log.d("Firestore", "Document ID: ${document.id} => Document Data: ${document.data}")
-                                val data = document.data
-                                if (data != null) {
-                                    dietDataList.add(data)
-                                }
-                            }
-                        }
-                    }.await()
-            } catch (e: Exception) {
-                Log.e("DietPlanFragment", "Error fetching data: ${e.message}")
-            }
-            return@withContext dietDataList
-        }
-    }
+
     //delete method
     private suspend fun deleteDataFromFirestore(day: String, ownerName: String) {
         withContext(Dispatchers.IO) {
@@ -211,5 +204,8 @@ class DietPlanFragment : Fragment() {
             }
         }
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
