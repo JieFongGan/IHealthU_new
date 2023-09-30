@@ -68,7 +68,13 @@ class DietSearchFragment : Fragment() {
         dsSearchWeb.setOnClickListener {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.framelayout_activitymain, DietSearchWebFragment())
+            val fragment = DietSearchWebFragment()
+
+            val bundle = Bundle()
+            bundle.putString("searchQuery", searchPlanView.query.toString())  // Get text from SearchView
+            fragment.arguments = bundle
+
+            fragmentTransaction.replace(R.id.framelayout_activitymain, fragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

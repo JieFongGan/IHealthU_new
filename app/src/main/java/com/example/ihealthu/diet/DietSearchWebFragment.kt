@@ -23,10 +23,11 @@ class DietSearchWebFragment : Fragment() {
     ): View? {
         _binding =  FragmentDietSearchWebBinding.inflate(inflater, container, false)
         dsWebView = binding.dsWebView
-        webViewSetup("asd")
+        val searchQuery = arguments?.getString("searchQuery") ?: "DefaultSearchText"
+        webViewSetup(searchQuery)
         return binding.root
     }
-
+@SuppressLint("SetJavaScriptEnabled")
 private fun webViewSetup(search:String){
     dsWebView.webViewClient = object : WebViewClient() {
         override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -35,7 +36,8 @@ private fun webViewSetup(search:String){
         }
     }
     dsWebView.apply{
-        loadUrl("https://www.google.com/search?q=wsa")
+        loadUrl("https://www.google.com/search?q=Diet+Plan+$search")
+        settings.javaScriptEnabled = true
     }
 }
 
