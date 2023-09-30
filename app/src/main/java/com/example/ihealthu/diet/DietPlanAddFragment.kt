@@ -70,7 +70,7 @@ class DietPlanAddFragment : Fragment() {
             val selectedDay = bundle.getString("day")
             etDietDays = selectedDay.toString()
         }
-        //get the existing data documentID
+        //get the existing data documentID *no use now
         parentFragmentManager.setFragmentResultListener("documentId", this) { _, bundle ->
             val documentIds = bundle.getString("docID")
             documentId = documentIds.toString()
