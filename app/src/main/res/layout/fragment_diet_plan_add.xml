@@ -24,12 +24,14 @@
             android:hint="Today's Plan Purpose/Description"/>
         <EditText
             android:id="@+id/editTextBreakfastTime"
+            android:inputType="time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:hint="Breakfast Time"/>
         <EditText
             android:id="@+id/editTextBreakfastKals"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"

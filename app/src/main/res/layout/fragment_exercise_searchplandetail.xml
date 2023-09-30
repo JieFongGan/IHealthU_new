@@ -97,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="@string/monday"
+                    android:text="@string/monday_full"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -157,7 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="@string/tuesday"
+                    android:text="@string/tuesday_full"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -217,7 +217,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="@string/wednesday"
+                    android:text="@string/wednesday_full"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -277,7 +277,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="@string/thursday"
+                    android:text="@string/thursday_full"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -337,7 +337,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="@string/friday"
+                    android:text="@string/friday_full"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -397,7 +397,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="@string/saturday"
+                    android:text="@string/saturday_full"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -457,7 +457,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="@string/sunday"
+                    android:text="@string/sunday_full"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -521,7 +521,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
                     android:layout_weight="1"
-                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:backgroundTint="@color/pinkColor"
                     android:text="@string/cancel" />
 
                 <Button
@@ -530,7 +530,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_weight="1"
-                    android:backgroundTint="@android:color/holo_orange_dark"
+                    android:backgroundTint="@color/green"
                     android:text="@string/import_txt" />
             </LinearLayout>
         </LinearLayout>

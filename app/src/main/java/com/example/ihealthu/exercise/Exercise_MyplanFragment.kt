@@ -1,3 +1,6 @@
+package com.example.ihealthu.exercise
+
+import MyeplanAdapter
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log

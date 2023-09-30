@@ -36,7 +36,7 @@ private fun webViewSetup(search:String){
         }
     }
     dsWebView.apply{
-        loadUrl("https://www.google.com/search?q=Diet+Plan+$search")
+        loadUrl("https://www.google.com/search?q=Diet+Plan+$search&tbm=isch&ved")
         settings.javaScriptEnabled = true
     }
 }
