@@ -81,14 +81,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Confirm"
-            android:backgroundTint="#CBFF6464"
+            android:backgroundTint="@color/lightred"
             android:minHeight="48dp"/>
         <Button
             android:id="@+id/cancelPlanAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancel"
-            android:backgroundTint="#673AB7"
+            android:backgroundTint="@color/blue"
             android:minHeight="48dp"/>
     </LinearLayout>
 </ScrollView>

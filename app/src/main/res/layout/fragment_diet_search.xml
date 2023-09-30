@@ -8,30 +8,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchPlanView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#CBFFBDBD" />
+            android:background="@color/lightpink" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             tools:listitem="@layout/list_item_diet_search"/>
+
         <Button
             android:id="@+id/dsBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#673AB7"
-            android:text="Back"
-            />
+            android:backgroundTint="@color/blue"
+            android:text="Back" />
+
         <Button
             android:id="@+id/dsSearchWeb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#CBFF6464"
-            android:text="Search On Web"
-            />
+            android:backgroundTint="@color/lightred"
+            android:text="Search On Web" />
     </LinearLayout>
 </FrameLayout>

@@ -22,7 +22,7 @@
                 android:layout_weight="1"
                 android:text="Mon"
                 android:textSize="8sp"
-                android:backgroundTint="#CBFF6464"
+                android:backgroundTint="@color/lightred"
                 android:padding="4dp"/>
             <Button
                 android:id="@+id/dogTue"
@@ -31,7 +31,7 @@
                 android:layout_weight="1"
                 android:text="Tue"
                 android:textSize="8sp"
-                android:backgroundTint="#CBFF6464"
+                android:backgroundTint="@color/lightred"
                 android:padding="4dp"/>
             <Button
                 android:id="@+id/dogWed"
@@ -40,7 +40,7 @@
                 android:layout_weight="1"
                 android:text="Wed"
                 android:textSize="8sp"
-                android:backgroundTint="#CBFF6464"
+                android:backgroundTint="@color/lightred"
                 android:padding="4dp"/>
             <Button
                 android:id="@+id/dogThu"
@@ -49,7 +49,7 @@
                 android:layout_weight="1"
                 android:text="Thu"
                 android:textSize="8sp"
-                android:backgroundTint="#CBFF6464"
+                android:backgroundTint="@color/lightred"
                 android:padding="4dp"/>
             <Button
                 android:id="@+id/dogFri"
@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:text="Fri"
                 android:textSize="8sp"
-                android:backgroundTint="#CBFF6464"
+                android:backgroundTint="@color/lightred"
                 android:padding="4dp"/>
             <Button
                 android:id="@+id/dogSat"
@@ -67,7 +67,7 @@
                 android:layout_weight="1"
                 android:text="Sat"
                 android:textSize="8sp"
-                android:backgroundTint="#CBFF6464"
+                android:backgroundTint="@color/lightred"
                 android:padding="4dp"/>
             <Button
                 android:id="@+id/dogSun"
@@ -76,7 +76,7 @@
                 android:layout_weight="1"
                 android:text="Sun"
                 android:textSize="8sp"
-                android:backgroundTint="#CBFF6464"
+                android:backgroundTint="@color/lightred"
                 android:padding="4dp"/>
         </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
@@ -89,7 +89,7 @@
             android:id="@+id/dogSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#CBFF6464"
+            android:backgroundTint="@color/lightred"
             android:text="Search Plan" />
 
         <LinearLayout
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#CBFF6464"
+                android:backgroundTint="@color/lightred"
                 android:text="Edit" />
 
             <Button
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#673AB7"
+                android:backgroundTint="@color/pinkColor"
                 android:text="Delete" />
         </LinearLayout>
     </LinearLayout>

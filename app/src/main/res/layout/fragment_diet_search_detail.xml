@@ -223,20 +223,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="10dp">
+
             <Button
                 android:id="@+id/dsdGetPlan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#CBFF6464"
-                android:text="Get This Plan"/>
+                android:backgroundTint="@color/lightred"
+                android:text="Get This Plan" />
+
             <Button
                 android:id="@+id/dsdBack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#673AB7"
-                android:text="Back"/>
+                android:backgroundTint="@color/blue"
+                android:text="Back" />
         </LinearLayout>
     </LinearLayout>
 
