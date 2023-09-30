@@ -25,5 +25,11 @@
             android:layout_height="wrap_content"
             android:text="Back"
             />
+        <Button
+            android:id="@+id/dsSearchWeb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search On Web"
+            />
     </LinearLayout>
 </FrameLayout>

@@ -25,6 +25,7 @@ class DietSearchFragment : Fragment() {
     private lateinit var searchPlanView: SearchView
     private lateinit var dsRecyclerView: RecyclerView
     private lateinit var dsBack: Button
+    private lateinit var dsSearchWeb: Button
     private var searchResults = mutableListOf<Map<String, Any>>()
     private lateinit var dietSearchAdapter: DietSearchAdapter
 
@@ -36,6 +37,7 @@ class DietSearchFragment : Fragment() {
         searchPlanView = binding.searchPlanView
         dsRecyclerView = binding.dsRecyclerView
         dsBack = binding.dsBack
+        dsSearchWeb = binding.dsSearchWeb
         //adapter init
         dietSearchAdapter = DietSearchAdapter(mutableListOf(), parentFragmentManager)
         dsRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -60,6 +62,13 @@ class DietSearchFragment : Fragment() {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.framelayout_activitymain, DietPlanFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+        dsSearchWeb.setOnClickListener {
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, DietSearchWebFragment())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
