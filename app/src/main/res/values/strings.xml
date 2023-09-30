@@ -22,6 +22,13 @@
     <string name="friday">Fri</string>
     <string name="saturday">Sat</string>
     <string name="sunday">Sun</string>
+    <string name="monday_full">Monday</string>
+    <string name="tuesday_full">Tuesday</string>
+    <string name="wednesday_full">Wednesday</string>
+    <string name="thursday_full">Thursday</string>
+    <string name="friday_full">Friday</string>
+    <string name="saturday_full">Saturday</string>
+    <string name="sunday_full">Sunday</string>
     <string name="search_plan">search plan</string>
     <string name="my_plan">my plan</string>
     <string name="history">History</string>

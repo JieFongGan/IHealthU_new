@@ -9,5 +9,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="textColor">#ECE5EC</color>
     <color name="pinkColor">#F40B53</color>
+    <color name="lightred">#CBFF6464</color>
+    <color name="lightpink">#CBFFBDBD</color>
     <color name="transparentColor">#00FFFFFF</color>
 </resources>
