@@ -35,7 +35,7 @@
                     android:layout_marginEnd="@dimen/single_btn_only"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/pinkColor"
+                    android:backgroundTint="@color/blue"
                     android:text="@string/back"
                     android:textColor="@color/white"
                     android:textSize="20sp" />

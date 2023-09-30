@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/scroll_login"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Login">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
 
 
     <androidx.cardview.widget.CardView
@@ -115,7 +121,7 @@
                 android:layout_marginEnd="24dp"
                 android:textColor="@color/textColor"
                 android:layout_gravity="center"
-                app:backgroundTint = "@color/pinkColor"
+                app:backgroundTint = "@color/lightred"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <Button
@@ -129,7 +135,7 @@
                 android:layout_marginEnd="24dp"
                 android:textColor="@color/textColor"
                 android:layout_gravity="center"
-                app:backgroundTint = "@color/pinkColor"
+                app:backgroundTint = "@color/lightred"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -140,3 +146,4 @@
 
 
 </LinearLayout>
+</ScrollView>

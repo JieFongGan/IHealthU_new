@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".profile.User_BMI">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
     <LinearLayout
@@ -95,7 +98,7 @@
                 android:layout_marginEnd="@dimen/single_btn_only"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_weight="1"
-                android:backgroundTint="@color/pinkColor"
+                android:backgroundTint="@color/lightred"
                 android:text="@string/calculate"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
@@ -121,7 +124,7 @@
                 android:layout_marginEnd="@dimen/single_btn_only"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_weight="1"
-                android:backgroundTint="@color/pinkColor"
+                android:backgroundTint="@color/blue"
                 android:text="@string/back"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
@@ -129,5 +132,6 @@
 
 
     </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

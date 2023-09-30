@@ -16,15 +16,20 @@ import com.google.firebase.auth.FirebaseAuth
 
 class User_Main : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var binding: FragmentUserMainBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_user_main, container, false)
+        binding = FragmentUserMainBinding.inflate(inflater, container, false)
+        // Inflate the layout for this fragment
+        return binding.root
+    }
 
-        val button1: RelativeLayout = view.findViewById(R.id.user_personal_profile)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        button1.setOnClickListener {
+        binding.userPersonalProfile.setOnClickListener {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.framelayout_activitymain, User_Personal_Profile())
@@ -32,9 +37,7 @@ class User_Main : Fragment() {
             fragmentTransaction.commit()
         }
 
-        val button2: RelativeLayout = view.findViewById(R.id.user_bmi)
-
-        button2.setOnClickListener {
+        binding.userBmi.setOnClickListener {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.framelayout_activitymain, User_BMI_Main())
@@ -42,10 +45,7 @@ class User_Main : Fragment() {
             fragmentTransaction.commit()
         }
 
-
-        val button3: RelativeLayout = view.findViewById(R.id.user_logOut)
-
-        button3.setOnClickListener {
+        binding.userLogOut.setOnClickListener {
             // Create and configure the AlertDialog
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Sign Out")
@@ -73,15 +73,6 @@ class User_Main : Fragment() {
             val dialog = builder.create()
             dialog.show()
         }
-
-        // Inflate the layout for this fragment
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
 
     }
 
