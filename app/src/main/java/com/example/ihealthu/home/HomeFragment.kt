@@ -6,14 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ihealthu.EmailStore
 import com.example.ihealthu.R
 import com.example.ihealthu.databinding.FragmentHomeBinding
 import com.example.ihealthu.profile.User_BMI
 import com.example.ihealthu.profile.User_Personal_Profile
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
@@ -68,6 +72,43 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val db = FirebaseFirestore.getInstance()
+
+        val emailToSearch = EmailStore.globalEmail
+        if(emailToSearch != null){
+
+            db.collection("user")
+                .whereEqualTo("email", emailToSearch)
+                .get()
+                .addOnSuccessListener { documents ->
+                    if (!documents.isEmpty) {
+                        val document = documents.documents[0] // Assuming there's only one user with the specified email
+
+                        // Retrieve user data
+                        val profilePicUrl = document["profilepic"] as? String
+
+                        // Load and display profile picture if available
+                        if (!profilePicUrl.isNullOrEmpty()) {
+                            loadProfilePicture(profilePicUrl)
+                        }
+
+                    } else {
+                        Toast.makeText(requireContext(), "No user found", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), "failed, try again", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+        binding.userProfileIcon.setOnClickListener {
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, User_Personal_Profile())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
         binding.btnGoBMI.setOnClickListener {
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
@@ -76,6 +117,12 @@ class HomeFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
+    }
+
+    private fun loadProfilePicture(profilePicUrl: String) {
+        Glide.with(requireContext())
+            .load(profilePicUrl)
+            .into(binding.userProfileIcon)
     }
 
     private fun loadDataForDay(day: String, ownerName: String) {

@@ -38,6 +38,16 @@ class User_BMI_Main : Fragment() {
             fragmentTransaction.commit()
         }
 
+        val button3: RelativeLayout = view.findViewById(R.id.user_BmiBack)
+
+        button3.setOnClickListener {
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framelayout_activitymain, User_Main())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
         // Inflate the layout for this fragment
         return view
     }
