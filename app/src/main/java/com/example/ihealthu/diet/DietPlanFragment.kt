@@ -181,7 +181,6 @@ class DietPlanFragment : Fragment() {
             //chg the value
             theday = day
             setFragmentResult("selectedDay", bundleOf("day" to day))
-            //submitList
         }
     }
 
