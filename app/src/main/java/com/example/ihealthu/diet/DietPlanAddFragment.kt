@@ -114,6 +114,32 @@ class DietPlanAddFragment : Fragment() {
                 val txOwnerName = etOwnerName
                 val txDietDays = etDietDays
 
+                //input vali
+                if (txplanPP.isEmpty()) {
+                    Toast.makeText(context, "Plan Purpose cannot be empty", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val txBfkalsInt = txBfkals.toIntOrNull()
+                val txLukalsInt = txLukals.toIntOrNull()
+                val txDnkalsInt = txDnkals.toIntOrNull()
+
+                if (txBfkalsInt != null && txBfkalsInt > 3000) {
+                    Toast.makeText(context, "Breakfast of over 3,000 calories seems unusual", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (txLukalsInt != null && txLukalsInt > 3000) {
+                    Toast.makeText(context, "Lunch of over 3,000 calories seems unusual", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (txDnkalsInt != null && txDnkalsInt > 3000) {
+                    Toast.makeText(context, "Dinner of over 3,000 calories seems unusual", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                //end input vali
+
                 val data = hashMapOf(
                     "dpOwnerName" to txOwnerName,
                     "dpDietDays" to txDietDays,
