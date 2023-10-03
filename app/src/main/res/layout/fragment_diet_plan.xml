@@ -79,6 +79,18 @@
                 android:backgroundTint="@color/lightred"
                 android:padding="4dp"/>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/noDataTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No plan today\nCan Click Edit Button to Create Plan"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dogRecyclerView"
                 android:layout_width="match_parent"

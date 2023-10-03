@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,83 +19,100 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="day's Plan Purpose/Description"
+            android:text="day's Plan Purpose/Description:"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/ppPDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ppPDesc" />
+        android:text="ppPDesc"
+        android:textColor="@color/blue" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#CBFF6464" />
 
     <!-- Breakfast Section -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Breakfast"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Breakfast Time: " />
+            android:text="Breakfast"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#CBFF6464" />
 
-        <TextView
-            android:id="@+id/bfTime"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="bfTime" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Breakfast Time: " />
 
-        <TextView
+            <TextView
+                android:id="@+id/bfTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bfTime" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Breakfast EsKl: " />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/bfEsKl"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Breakfast EsKl: " />
+
+            <TextView
+                android:id="@+id/bfEsKl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bfEsKl" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="bfEsKl" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Breakfast Remark: " />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Breakfast Remark: " />
-
-        <TextView
-            android:id="@+id/bfRemark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="bfRemark" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/bfRemark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bfRemark" />
+        </LinearLayout>
 
     <!-- Lunch Section -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#CBFF6464" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lunch"
         android:textSize="18sp"
         android:textStyle="bold" />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#CBFF6464" />
     <!-- Lunch Time -->
     <LinearLayout
         android:layout_width="wrap_content"
@@ -147,12 +165,20 @@
     </LinearLayout>
 
     <!-- Dinner Section -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#CBFF6464" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dinner"
         android:textSize="18sp"
         android:textStyle="bold" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#CBFF6464" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

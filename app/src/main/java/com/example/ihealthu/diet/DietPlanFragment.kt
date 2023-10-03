@@ -24,6 +24,7 @@ import kotlinx.coroutines.withContext
 import java.io.Serializable
 import kotlinx.coroutines.*
 import android.app.AlertDialog
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.ihealthu.EmailStore
@@ -44,6 +45,7 @@ class DietPlanFragment : Fragment() {
     private lateinit var dogEdit: Button
     private lateinit var dogDelete: Button
     private lateinit var theday: String
+    private lateinit var noDataTextView: TextView
 
     private lateinit var dogSearch: Button
 
@@ -65,6 +67,7 @@ class DietPlanFragment : Fragment() {
         //user name
         etOwnerName = EmailStore.globalEmail.toString()
         theday = "Mon"
+        noDataTextView = binding.noDataTextView
 
         dogMon = binding.dogMon
         dogTue = binding.dogTue
@@ -87,8 +90,18 @@ class DietPlanFragment : Fragment() {
         dogRecyclerView.adapter = DietPlanAdapter(emptyList<Map<String, Any>>().toMutableList())
         dogRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         // Observe changes in data and update UI
+//        viewModel.dietData.observe(viewLifecycleOwner) { data ->
+//            (dogRecyclerView.adapter as DietPlanAdapter).submitList(data)
+//        }
         viewModel.dietData.observe(viewLifecycleOwner) { data ->
-            (dogRecyclerView.adapter as DietPlanAdapter).submitList(data)
+            if (data.isEmpty()) {
+                binding.noDataTextView.visibility = View.VISIBLE
+                dogRecyclerView.visibility = View.GONE
+            } else {
+                binding.noDataTextView.visibility = View.GONE
+                dogRecyclerView.visibility = View.VISIBLE
+                (dogRecyclerView.adapter as DietPlanAdapter).submitList(data)
+            }
         }
         // Observe changes in selected day
         viewModel.daySelected.observe(viewLifecycleOwner) { day ->
