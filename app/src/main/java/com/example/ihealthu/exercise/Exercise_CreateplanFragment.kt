@@ -64,6 +64,18 @@ class Exercise_CreateplanFragment : Fragment() {
             val newPlanName = inputNewPlanName.text.toString()
             val newPlandescription = inputnewplandescription.text.toString()
 
+            // Check if the new plan name is empty
+            if (newPlanName.isEmpty()) {
+                inputNewPlanName.error = "Plan name cannot be empty"
+                return@setOnClickListener
+            }
+
+            // Check if the new plan description is empty
+            if (newPlandescription.isEmpty()) {
+                inputnewplandescription.error = "Plan description cannot be empty"
+                return@setOnClickListener
+            }
+
             val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
             val data = hashMapOf(
