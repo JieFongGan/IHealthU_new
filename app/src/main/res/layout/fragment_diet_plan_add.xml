@@ -44,12 +44,14 @@
             android:hint="Breakfast Food Remark"/>
         <EditText
             android:id="@+id/editTextLunchTime"
+            android:inputType="time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:hint="Lunch Time"/>
         <EditText
             android:id="@+id/editTextLunchKals"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
@@ -62,12 +64,14 @@
             android:hint="Lunch Food Remark"/>
         <EditText
             android:id="@+id/editTextDinnerTime"
+            android:inputType="time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:hint="Dinner Time"/>
         <EditText
             android:id="@+id/editTextDinnerKals"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
